@@ -5,18 +5,21 @@ weight : 1
 chapter : false
 pre : " <b> 1. </b> "
 ---
-**Session Manager** là một chức năng nằm trong dịch vụ System Manager của AWS, Session Manager cung cấp khả năng quản lý các máy chủ một cách an toàn mà **không cần mở port SSH, không cần Bastion Host hoặc quản lý SSH key**. 
-Session Manager cũng giúp dễ dàng tuân thủ các chính sách của công ty yêu cầu quyền truy cập có kiểm soát, đảm bảo việc bảo mật nghiêm ngặt và ghi log truy việc truy cập trong khi vẫn cung cấp cho người dùng cuối quyền truy cập đa nền tảng.
+# Giới thiệu tích hợp không ETL (zero-ETL)
 
-Với việc sử dụng Session Manager, bạn sẽ có được những ưu điểm sau:
+## Định nghĩa
+**Tích hợp không ETL (zero-ETL):** là một tập hợp các tích hợp giúp loại bỏ hoặc giảm thiểu nhu cầu xây dựng quy trình dữ liệu ETL. extract (trích xuất), transform (chuyển đổi) và load (tải) (ETL) là quy trình kết hợp, làm sạch và chuẩn hóa dữ liệu từ các nguồn khác nhau để sẵn sàng cho khối lượng công việc phân tích, AI và ML. Các quy trình ETL truyền thống tốn nhiều thời gian và phức tạp để phát triển, duy trì và điều chỉnh quy mô. Thay vào đó, tích hợp không ETL tạo điều kiện thuận lợi cho việc di chuyển dữ liệu point-to-point (điểm nối điểm) mà không cần tạo quy trình dữ liệu ETL. Tích hợp không ETL cũng có thể cho phép truy vấn qua các lô cốt dữ liệu mà không cần di chuyển dữ liệu.
 
-- Không cần phải mở cổng 22 cho giao thức SSH.
-- Có thể cấu hình để kết nối không cần đi ra ngoài internet.
-- Không cần quản lý private key của server để kết nối SSH.
-- Quản lý tập trung được user bằng việc sử dụng AWS IAM.
-- Truy cập tới server một cách dễ dàng và đơn giản bằng một cú click chuột.
-- Thời gian truy cập nhanh chóng hơn các phương thức truyền thống như SSH.
-- Hỗ trợ nhiều hệ điều hành khác nhau như Linux, Windows, MacOS.
-- Log lại được các phiên kết nối và các câu lệnh đã thực thi trong lúc kết nối tới server.
+## Các lợi ích mà Tích hợp không ETL mang lại:
+- Giảm độ phức tạp của hệ thống khi phải ETL.
+- Giảm phụ phí khi thực hiện quy trình ETL.
+- Không làm trì hoãn thời gian cho phân tích, AI, ML.
+- Tăng tính linh hoạt vì nó làm đơn giản hóa kiến trúc dữ liệu, cho phép giảm nỗ lực cũng như sử dụng dữ liệu mới và không phải xử lý lượng lớn dữ liệu.
+- Thu thập thông tin chuyên sâu nhanh hơn do các quy trình ETL truyền thống thường bao gồm đến bản cập nhật hàng loạt định kỳ, từ đó trì hoãn tính sẵn có của dữ liệu. Tích hợp không ETL lại cung cấp quyền truy cập dữ liệu theo thời gian thực hoặc gần thời gian thực, đảm bảo dữ liệu mới hơn để phân tích, cho công nghệ AI/ML và báo cáo, tăng trải nghiệm người dùng.
 
-Với những ưu điểm trên, bạn có thể sử dụng Session Manager thay vì sử dụng kỹ thuật Bastion host giúp chúng ta tiết kiệm được thời gian và chi phí khi quản lý server Bastion.
+## Ứng dụng của zero-ETL:
+
+- Doanh nghiệp cần nhanh chóng tải nhập và phân tích các loại dữ liệu khác nhau để đưa ra quyết định trong thời gian thực.
+- Nền tảng truyền dữ liệu và hàng đợi tin nhắn truyền dữ liệu thời gian thực từ một số nguồn.
+
+Theo truyền thống, quá trình di chuyển dữ liệu từ cơ sở dữ liệu hoạt động và giao dịch vào data warehouse và data lake luôn đòi hỏi một giải pháp ETL phức tạp. Ngày nay, khả năng tích hợp không ETL có thể hoạt động như một công cụ sao chép dữ liệu, ngay lập tức sao chép dữ liệu từ cơ sở dữ liệu hoạt động, cơ sở dữ liệu giao dịch và các ứng dụng vào data warehouse và data lake.

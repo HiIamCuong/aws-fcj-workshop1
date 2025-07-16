@@ -5,17 +5,20 @@ weight : 1
 chapter : false
 pre : " <b> 1. </b> "
 ---
-**Session Manager** is a function within the AWS System Manager service, SSM provides verifiable and secure version management without opening incoming ports, without Bastion Host or SSH key management. Session Manager also makes it easy to comply with corporate policies that require controlled access to instances, strict security practices, and fully auditable logs with instance access details, while still providing end-users with one-click cross-platform access to your managed instances.
+# Introduction to Zero-ETL Integration
 
-By using Session Manager, you get the following advantages that traditional methods do not have:
+## Definition
+**Zero-ETL Integration** refers to a set of integration methods that eliminate or minimize the need to build traditional ETL (Extract, Transform, Load) data processes. ETL is the process of combining, cleaning, and standardizing data from various sources to make it ready for analytical, AI, and ML workloads. Traditional ETL processes are time-consuming and complex to develop, maintain, and scale. Instead, zero-ETL integration facilitates point-to-point data movement without the need to build ETL pipelines. Zero-ETL can also enable cross-system querying without physically moving data.
 
-- No need to open port 22 for SSH protocol, so it is more secure.
-- Can be configured so that the connection does not need to go outside the internet, so it is more secure.
-- No need to manage the server's private key to connect to SSH.
-- Centralized management of users using AWS IAM.
-- Access to the server easily and simply with one click.
-- Faster access time than traditional methods like SSH
-- Support many different operating systems such as Linux, Windows, MacOS
-- Log the connection sessions and commands executed while connecting to the server.
-  
-With the above advantages, you can use Session Manager instead of using Bastion host technique to save us time and money when managing Bastion server. 
+## Benefits of Zero-ETL Integration
+- Reduces the complexity of systems that require ETL.
+- Lowers overhead costs associated with ETL processes.
+- Eliminates delays in analytics, AI, and ML workloads.
+- Increases flexibility by simplifying data architecture, reducing effort, and allowing the use of new data without processing large volumes.
+- Enables faster insights, as traditional ETL processes often involve periodic batch updates, which delay data availability. Zero-ETL provides real-time or near real-time data access, ensuring fresher data for analytics, AI/ML technologies, and reporting—improving the user experience.
+
+## Applications of Zero-ETL
+- Organizations that need to quickly ingest and analyze various types of data to make real-time decisions.
+- Data streaming platforms and message queues transmitting real-time data from multiple sources.
+
+Traditionally, moving data from operational and transactional databases into data warehouses and data lakes has required a complex ETL solution. Today, zero-ETL capabilities can act as a data replication tool, instantly copying data from operational databases, transactional systems, and applications into data warehouses and data lakes.
