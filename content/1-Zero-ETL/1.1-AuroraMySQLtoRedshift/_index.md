@@ -3,7 +3,7 @@ title : "Zero-ETL Integration Aurora MySQL to Redshift"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false
-pre : " <b> 1. </b> "
+pre : " <b> 1.1. </b> "
 ---
 
 Announced at AWS [re:Invent 2023](https://youtu.be/PMfn9_nTDbM?t=7418) and now generally available ([GA](https://aws.amazon.com/about-aws/whats-new/2024/09/amazon-rds-mysql-zero-etl-integration-redshift-generally-available/)) in many regions for RDS for MySQL version 8.0.
@@ -20,7 +20,7 @@ The integration will monitor the status of the data pipeline and automatically r
 
 ## Cost
 
-{{% notice notice about cost %}}
+{{% notice info %}}
 When you create a **Zero-ETL** integration between **RDS for MySQL** and **Amazon Redshift**, you will still pay the current pricing for **RDS MySQL** and **Amazon Redshift** (including data transfer costs). This integration feature does not incur additional charges.
 {{% /notice %}}
 

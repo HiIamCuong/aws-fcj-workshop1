@@ -3,7 +3,7 @@ title : "Tích hợp Zero-ETL Aurora MySQL sang Redshift"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false
-pre : " <b> 1. </b> "
+pre : " <b> 1.1. </b> "
 ---
 
 Được công bố tại sự kiện AWS [re:Invent 2023](https://youtu.be/PMfn9_nTDbM?t=7418) và hiện đã khả dụng rộng rãi ([GA](https://aws.amazon.com/about-aws/whats-new/2024/09/amazon-rds-mysql-zero-etl-integration-redshift-generally-available/)) tại nhiều khu vực cho RDS for MySQL phiên bản 8.0.
@@ -20,7 +20,7 @@ Tính năng tích hợp này sẽ giám sát tình trạng của pipeline dữ l
 
 ## Chi phí
 
-{{% notice notice about cost %}}
+{{% notice info %}}
 Khi bạn tạo tích hợp **Zero-ETL** giữa **RDS for MySQL** và **Amazon Redshift**, bạn vẫn thanh toán theo mức giá hiện tại của **RDS MySQL** và **Amazon Redshift** (bao gồm chi phí truyền dữ liệu). Tính năng tích hợp này không tính thêm phí.
 {{% /notice %}}
 
