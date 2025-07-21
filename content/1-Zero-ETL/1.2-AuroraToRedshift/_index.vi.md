@@ -31,7 +31,9 @@ Tích hợp này theo dõi tình trạng pipeline dữ liệu và cố gắng ph
 
 ## Chi phí
 
-> Khi bạn tạo tích hợp Aurora Zero-ETL với Amazon Redshift, bạn **vẫn thanh toán cho Aurora và Redshift theo giá hiện hành** (bao gồm chi phí chuyển dữ liệu). Việc sử dụng tính năng tích hợp Zero-ETL **không phát sinh thêm chi phí**.
+{{% notice info %}}
+Khi bạn tạo tích hợp Aurora Zero-ETL với Amazon Redshift, bạn **vẫn thanh toán cho Aurora và Redshift theo giá hiện hành** (bao gồm chi phí chuyển dữ liệu). Việc sử dụng tính năng tích hợp Zero-ETL **không phát sinh thêm chi phí**.
+{{% /notice %}}
 
 Bạn sẽ chi trả cho các tài nguyên sử dụng trong quá trình tích hợp, bao gồm:
 

@@ -30,8 +30,9 @@ You can continue to perform real-time transactions on Aurora while using Redshif
 The integration monitors the pipeline health and attempts recovery from failures when possible. You can integrate multiple Aurora DB clusters into a single Amazon Redshift namespace for cross-application insights.
 
 ## Pricing
-
-> When you create an Aurora Zero-ETL integration with Amazon Redshift, you continue to pay for Aurora and Amazon Redshift usage at their current rates (including data transfer costs). The integration feature itself incurs **no additional charge**.
+{{% notice info %}}
+When you create an Aurora Zero-ETL integration with Amazon Redshift, you continue to pay for Aurora and Amazon Redshift usage at their current rates (including data transfer costs). The integration feature itself incurs **no additional charge**.
+{{% /notice %}}
 
 You will pay for the following resources:
 
