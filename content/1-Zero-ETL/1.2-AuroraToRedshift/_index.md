@@ -1,7 +1,7 @@
 ---
 title : "Zero-ETL Integration Aurora Amazon Aurora to Amazon Redshift"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 2 
 chapter : false
 pre : " <b> 1.2 </b> "
 ---
