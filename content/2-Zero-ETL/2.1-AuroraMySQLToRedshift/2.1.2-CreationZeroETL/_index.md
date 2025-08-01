@@ -8,9 +8,9 @@ pre : " <b> 2.1.2 </b> "
 
 ## Create Zero-ETL Integration
 1. To create the zero-ETL integration
-+ Access Amazon RDS console
-+ Choose Zero-ETL integrations in the navigation pane
-+ Click on Create zero-ETL integration as shown below.
++ Access **Amazon RDS** console
++ Choose **Zero-ETL integrations** in the navigation pane
++ Click on **Create zero-ETL integration** as shown below.
 
 ![Create Zero-ETL Integration](/images/2.Zero-ETLIntegration/10.png)
 
