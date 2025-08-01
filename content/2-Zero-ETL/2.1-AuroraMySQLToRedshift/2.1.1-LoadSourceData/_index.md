@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 2.1.1 </b> "
 ---
 
-## Lời đầu
+## Outline:
 - Load your transactional database before creating Zero-ETL Integration. The first time sync of data is called SEEDING (storage level sync).
 
 - Test ability to filter source tables or schemas using DATA FILTERING during creation of a Zero-ETL integration.
