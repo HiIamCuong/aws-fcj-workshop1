@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 2.1.2 </b> "
 ---
 
-## Tạo tích hợp Zero-ETL
+## Create Zero-ETL Integration
 1. To create the zero-ETL integration
 + Access Amazon RDS console
 + Choose Zero-ETL integrations in the navigation pane
@@ -16,7 +16,7 @@ pre : " <b> 2.1.2 </b> "
 
 2. Under **Step 1** Getting started, for **Integration identifier**
 + Enter an integration name of your choice, for example `zero-etl-aurora-mysql-redshift`. 
-+ Click Next.
++ Click **Next**.
 
 ![Create Zero-ETL Integration](/images/2.Zero-ETLIntegration/11.png)
 
