@@ -10,24 +10,24 @@ pre : " <b> 2. </b> "
 First, you need to log in to your **AWS Management Console** account with **Administrator** privileges and select the **N. Virginia (us-east-1)** or **Oregon (us-west-2)** region.  
 {{% /notice %}}
 
-### 1. Create the Stack
+1. Create the Stack
 
 Click [here](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=zero-etl-lab&templateURL=https://redshift-demos.s3.amazonaws.com/zetl/approaches/zeroetl.yaml) to go to the **Stack Configuration** page in **AWS CloudFormation**.
 
 (**Stacks** in **AWS CloudFormation** are used to store the configuration of AWS services and allow you to create, launch, and delete multiple AWS services in bulk.)
 
-### 2. After clicking the link, you’ll land on Step 1  
+2. After clicking the link, you’ll land on Step 1  
 + Click **Next**  
 
 ![Create Stack](/images/2.prerequisite/1.png)
 
-### 3. In Step 2  
+3. In Step 2  
 + Click **Next**  
 
 ![Create Stack](/images/2.prerequisite/2.png)  
 ![Create Stack](/images/2.prerequisite/3.png)
 
-### 4. In Step 3  
+4. In Step 3  
 + Check **I acknowledge that AWS CloudFormation might create IAM resources with custom name**  
 + Check **I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND**  
 + Click **Next**  
@@ -36,7 +36,7 @@ Click [here](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?sta
 ![Create Stack](/images/2.prerequisite/5.png)  
 ![Create Stack](/images/2.prerequisite/6.png)
 
-### 5. In Step 4  
+5. In Step 4  
 + Review the information  
 + Click **Next**  
 
@@ -46,16 +46,16 @@ Click [here](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?sta
 ![Create Stack](/images/2.prerequisite/10.png)  
 ![Create Stack](/images/2.prerequisite/11.png)
 
-### 6. Wait for the Stack to finish creating all resources  
+6. Wait for the Stack to finish creating all resources  
 
 ![Create Stack](/images/2.prerequisite/12.png)
 
-### 7. Completed  
+7. Completed  
 
 ![Create Stack](/images/2.prerequisite/13.png)
 
 {{% notice info %}}  
-At this point, the preparation is complete. You can proceed to **Part 3**. The section below provides additional explanations about the resources created by this stack.  
+At this point, the preparation is complete. You can proceed to [Part 3]([phần 3](3-RedshiftStreamingIngestion)). The section below provides additional explanations about the resources created by this stack.  
 {{% /notice %}}
 
 ---

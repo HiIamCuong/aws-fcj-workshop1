@@ -1,9 +1,9 @@
 ---
 title : "Redshift Streaming Ingestion"
 date :  "`r Sys.Date()`" 
-weight : 2 
+weight : 3 
 chapter : false
-pre : " <b> 2. </b> "
+pre : " <b> 3. </b> "
 ---
 
 **Amazon Redshift Streaming Ingestion** is a powerful tool that allows you to ingest and analyze streaming data with high throughput and low latency, making it suitable for real-time data analytics needs. Below are the key features of this tool:

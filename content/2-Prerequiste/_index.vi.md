@@ -7,7 +7,7 @@ pre : " <b> 2. </b> "
 ---
 
 {{% notice info %}}
-Trước hết bạn cần đăng nhập vào tài khoản AWS Console Managerment có quyền Administrator và chọn region N. Virginia (us-east-1) hoặc Oregon (us-west-2) 
+Trước hết bạn cần đăng nhập vào tài khoản **AWS Console Management** có **quyền Administrator** và chọn **region** **N.Virginia (us-east-1)** hoặc **Oregon (us-west-2)** 
 {{% /notice %}}
 
 1. Tạo Stack
@@ -62,7 +62,7 @@ Trước hết bạn cần đăng nhập vào tài khoản AWS Console Managerme
 ![Create Stack](/images/2.prerequisite/13.png)
 
 {{% notice info %}}
-Đến bước này đã xong bước chuẩn bị. Bạn có thể đi đến phần 3. Phần dưới đây là để giải thích thêm về các tài nguyên Stack này tạo ra
+Đến bước này đã xong bước chuẩn bị. Bạn có thể đi đến [phần 3](3-RedshiftStreamingIngestion). Phần dưới đây là để giải thích thêm về các tài nguyên Stack này tạo ra
 {{% /notice %}}
 
 - Một **VPC** với nhiều **subnet**, **routes table** và các tài nguyên mạng khác như **Security Group** để sử dụng **EC2**, **RDS**, **Aurora**
@@ -89,9 +89,11 @@ Trước hết bạn cần đăng nhập vào tài khoản AWS Console Managerme
 
 ![Create Stack](/images/2.prerequisite/20.png)
 
-- **Glue crawler** tên *CustPaymentTxHistory* để lấy dữ liệu từ **Amazon S3** và **Glue database** tên *spectrumdb*
+- **Glue crawler** tên *CustPaymentTxHistory* để lấy dữ liệu từ **Amazon S3**
 
 ![Create Stack](/images/2.prerequisite/21.png)
+
+- và **Glue database** tên *spectrumdb*
 
 ![Create Stack](/images/2.prerequisite/22.png)
 
@@ -99,7 +101,7 @@ Trước hết bạn cần đăng nhập vào tài khoản AWS Console Managerme
 
 ![Create Stack](/images/2.prerequisite/23.png)
 
-- **Lambda function** tên *GenStreamData-zero-etl-lab* thứ sẽ gửi data đến kinesis datastream
+- **Lambda function** tên *GenStreamData-zero-etl-lab* thứ sẽ gửi data đến **Kinesis Data Stream**
 
 ![Create Stack](/images/2.prerequisite/24.png)
 
