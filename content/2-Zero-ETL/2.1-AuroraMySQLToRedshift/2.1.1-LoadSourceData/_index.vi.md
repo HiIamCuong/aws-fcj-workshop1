@@ -1,57 +1,57 @@
 ---
-title : "Zero-ETL Integration Aurora MySQL to Amazon Redshift"
+title : "Tải dữ liệu nguồn"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false
-pre : " <b> 2.1 </b> "
+pre : " <b> 2.1.1 </b> "
 ---
 
-# Lời đầu
-- Load your transactional database before creating Zero-ETL Integration. The first time sync of data is called SEEDING (storage level sync).
+## Lời đầu
+- Tải transaction database của bạn trước khi tạo Tích hợp Zero-ETL. Lần đồng bộ dữ liệu đầu tiên được gọi là SEEDING (đồng bộ cấp độ lưu trữ).
 
-- Test ability to filter source tables or schemas using DATA FILTERING during creation of a Zero-ETL integration.
+- Kiểm tra khả năng lọc các source table hoặc schemas bằng DATA FILTERING trong quá trình tạo tích hợp Zero-ETL.
 
-- For an Active Zero-ETL integration, experience near real-time CDC (change data capture) replication. Try HISTORY MODE.
+- Đối với tích hợp Zero-ETL chủ động, trải nghiệm sao chép CDC (ghi lại dữ liệu thay đổi) gần như theo thời gian thực hãy thử HISTORY MODE.
 
-# Connect to Aurora Mysql, Create and Load tables for SEEDING.
+## Kết nối đến Aurora MySQL, tạo và tải table để SEEDING
 
-1. To connect to you Aurora Mysql instance 
-+ Navigate to **EC2 console** 
-+ Select your **EC2 instance** provisioned and click on **Connect**.
+1. Để kết nối với phiên bản **Aurora Mysql** của bạn
++ Vào bảng điều khiển **EC2**
++ Chọn **EC2 instance** đã được tạo ở bước chuẩn bị và nhấp vào **Connect** .
 
 ![Create Stack](/images/2.Zero-ETLIntegration/1.png)
 
-2. In the **Connect** page
-+ Choose **Session manager**
-+ Choose **Connect**
+2. Khi vào phần **Connect**
++ Chọn **Session manager**
++ Nhấn vào **Connect**
 
 ![Create Stack](/images/2.Zero-ETLIntegration/2.png)
 
-+ You will go to CLI of EC2 instance
++ Bạn sẽ vào được CLI của EC2 instance
 
-3. We need take Endpoint and Port of Aurora MySQL
+3. Ta cần lấy Endpoint và Port của Aurora MySQL 
 
-+ Navigate go **Aurora and RDS Console**
-+ Choose feature **Databases**
-+ Choose database with name prefix **zero-etl-lab-sourceamscluster-***
-+ Choose **Role Writer** below default choose
-+ Copy **endpoint** of writer
++ Vào bảng điều khiển **Aurora and RDS**
++ Nhấn vào mục **Databases**
++ Nhấn vào database có cấu trúc **zero-etl-lab-sourceamscluster-***
++ Nhấn chọn **Role Writer** bên dưới
++ Copy **endpoint** của writer
 
 ![Create Stack](/images/2.Zero-ETLIntegration/3.png)
 
-4. Go back CLI **EC2 instance**
-+ Use this command to connect to your **Aurora MySQL** from **EC2 instance**
+4. Quay lại CLI của **EC2 instance**
++ Dùng lệnh sau để kết nối tới **Aurora MySQL** từ **EC2 instance** của bạn
 
 `mysql -h <aurora_mysql_writer_endpoint> -P 3306 -u awsuser -p `
 
-+ Password to login
++ Nhập mật khẩu
 
 `Awsuser123`
 
 ![Create Stack](/images/2.Zero-ETLIntegration/5.png)
 
-5. Once connected with **Aurora MySQL instance**
-+ Execute below DDLs to create tables for order-line dataset.
+5. Khi đã kết nối với **Aurora MySQL instance**
++ Dùng lệnh SQL sau để lần lượt tạo các tables cho dataset
 
 ```
 create database seedingdemo;
@@ -113,11 +113,10 @@ create table lineitem (
   Primary Key(L_ORDERKEY, L_LINENUMBER)
 )  ;
 ```
-
 ![Create Stack](/images/2.Zero-ETLIntegration/6.png)
 
-6. Load the data into tables created above from S3. (Just take 1 for your region)
-+ **us-east-1** load commands:
+6. Dùng lệnh sau để tải dữ liệu từ **S3** vào tables đã tạo ở trên (Tùy vào region mà bạn sử dụng chỉ lấy một lệnh)
++ Lệnh tải cho region **us-east-1**:
 ```
 --- For us-east-1 (N Virginia) region, please use below load scripts:
 LOAD DATA FROM S3 PREFIX 's3://redshift-demos/ri2023/ant307/data/order-line/region/' INTO TABLE region FIELDS TERMINATED BY '|';          
@@ -127,7 +126,7 @@ LOAD DATA FROM S3 PREFIX 's3://redshift-demos/ri2023/ant307/data/order-line/cust
 LOAD DATA FROM S3 PREFIX 's3://redshift-demos/ri2023/ant307/data/order-line/orders/' INTO TABLE orders FIELDS TERMINATED BY '|';            
 LOAD DATA FROM S3 PREFIX 's3://redshift-demos/ri2023/ant307/data/order-line/lineitem/' INTO TABLE lineitem FIELDS TERMINATED BY '|';            
 ```
-+ **us-west-2** load commands:
++ Lệnh tải cho region **us-west-2**:
 ```
 --- For us-west-2 (Oregon) region, please use below load scripts:
 LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/order-line/region/' INTO TABLE region FIELDS TERMINATED BY '|';          
@@ -139,9 +138,9 @@ LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/ord
 ```
 ![Create Stack](/images/2.Zero-ETLIntegration/6.png)
 
-# Create and Load tables with missing primary key for demonstrating DATA FILTERING.
+## Tạo và tải các table thiếu khóa chính để minh họa DATA FILTERING
 
-1. On your **Aurora Mysql instance**, Run below DDLs to create tables and schema that we would filter out during first time sync (or SEEDING). Note that we have deliberately removed the primary key from the DDL to make them candidates to filter out.
+1. Tại **Aurora MySQL instance** của bạn. Chạy lệnh SQL dưới đây để tạo các table và schema mà chúng ta sẽ lọc ra trong lần đồng bộ hóa đầu tiên (SEEDING). Chúng ta cố tính xóa khóa chính khỏi SQL để chúng trở thành ứng cử viên cho việc lọc ra
 ```
 create database filter_missingpk;
 
@@ -162,14 +161,14 @@ create table nation (
 
 ```
 ![Create Stack](/images/2.Zero-ETLIntegration/8.png)
-2. Load the data into tables created above from S3.(Just take 1 for your region)
-+ **us-east-1** load commands:
+2. Tạo dữ liệu vào các bảng đã tạo ở trên từ **S3**(Tùy vào region mà bạn sử dụng chỉ lấy một lệnh)
++ Lệnh tải cho region **us-east-1**:
 ```
 --- For us-east-1 (N Virginia) region, please use below load scripts:
 LOAD DATA FROM S3 PREFIX 's3://redshift-demos/ri2023/ant307/data/order-line/region/' INTO TABLE region FIELDS TERMINATED BY '|';          
 LOAD DATA FROM S3 PREFIX 's3://redshift-demos/ri2023/ant307/data/order-line/nation/' INTO TABLE nation FIELDS TERMINATED BY '|';            
 ```
-+ **us-west-2** load commands:
++ Lệnh tải cho region **us-west-2**:
 ```
 --- For us-west-2 (Oregon) region, please use below load scripts:
 LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/order-line/region/' INTO TABLE region FIELDS TERMINATED BY '|';          
