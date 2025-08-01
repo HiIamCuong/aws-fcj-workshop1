@@ -7,17 +7,120 @@ pre : " <b> 2. </b> "
 ---
 
 {{% notice info %}}
-Bạn cần tạo sẵn 1 Linux instance thuộc public subnet và 1 Window instance thuộc private subnet để thực hiện bài thực hành này.
+Trước hết bạn cần đăng nhập vào tài khoản AWS Console Managerment có quyền Administrator và chọn region N. Virginia (us-east-1) hoặc Oregon (us-west-2) 
 {{% /notice %}}
 
-Để tìm hiểu cách tạo các EC2 instance và VPC với public/private subnet các bạn có thể tham khảo bài lab :
-  - [Giới thiệu về Amazon EC2](https://000004.awsstudygroup.com/vi/)
-  - [Làm việc với Amazon VPC](https://000003.awsstudygroup.com/vi/)
+1. Tạo Stack
 
-Để sử dụng System Manager để quản lý window instance nói riêng và các instance nói chung của chúng ta trên AWS, ta cần phải cung cấp quyền cho các instance của chúng ta có thể làm việc với System Manager.Trong phần chuẩn bị này, chúng ta cũng sẽ tiến hành tạo IAM Role để cấp quyền cho các instance có thể làm việc với System Manager.
+Ấn vào [đây](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=zero-etl-lab&templateURL=https://redshift-demos.s3.amazonaws.com/zetl/approaches/zeroetl.yaml) này để vào trang cấu hình Stack trong **AWS CloudFormation**.
 
-### Nội dung
-  - [Chuẩn bị VPC và EC2 Instance](2.1-createec2/)
-  - [Tạo IAM Role](2.2-createiamrole/)
+(**Stack** trong **AWS CloudFormation** có chức năng lưu trữ cấu hình của các dịch vụ AWS và có thể tạo, chạy và xóa đồng loạt các dịch vụ AWS khi tạo và xóa **Stack**)
 
-  
+2. Sau khi nhấn vào Link ta vào trang bước 1
++ Nhấn **Next**
+
+![Create Stack](/images/2.prerequisite/1.png)
+
+3. Tại bước 2
++ Nhấn **Next**
+
+![Create Stack](/images/2.prerequisite/2.png)
+
+![Create Stack](/images/2.prerequisite/3.png)
+
+4. Tại bước 3
++ Tích vào **I acknowledge that AWS CloudFormation might create IAM resources with custom name** 
++ Tích vào **I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND**
++ Nhấn **Next**
+
+![Create Stack](/images/2.prerequisite/4.png)
+
+![Create Stack](/images/2.prerequisite/5.png)
+
+![Create Stack](/images/2.prerequisite/6.png)
+
+5. Tại bước 4
++ Kiểm tra lại thông tin
++ Nhấn **Next**
+
+![Create Stack](/images/2.prerequisite/7.png)
+
+![Create Stack](/images/2.prerequisite/8.png)
+
+![Create Stack](/images/2.prerequisite/9.png)
+
+![Create Stack](/images/2.prerequisite/10.png)
+
+![Create Stack](/images/2.prerequisite/11.png)
+
+6. Đợi để Stack tạo xong các tài nguyên
+
+![Create Stack](/images/2.prerequisite/12.png)
+
+7. Hoàn thành
+
+![Create Stack](/images/2.prerequisite/13.png)
+
+{{% notice info %}}
+Đến bước này đã xong bước chuẩn bị. Bạn có thể đi đến phần 3. Phần dưới đây là để giải thích thêm về các tài nguyên Stack này tạo ra
+{{% /notice %}}
+
+- Một **VPC** với nhiều **subnet**, **routes table** và các tài nguyên mạng khác như **Security Group** để sử dụng **EC2**, **RDS**, **Aurora**
+
+![Create Stack](/images/2.prerequisite/14.png)
+
+- Một **bucket** của **Amazon S3** với tên *zero-etl-approaches-file-store-** để chứa thư mục Machine Learning
+
+![Create Stack](/images/2.prerequisite/15.png)
+
+- **IAM Roles** với các quyền cần thiết để thực thi truy vấn trên **Amazon RDS** và **Amazon Redshift**.
+
+![Create Stack](/images/2.prerequisite/35.png)
+
+- Một **EC2 instance** để kết nối và thực thi truy vấn trên **Aurora MySQL** và **Aurora PostgreSQL**
+
+![Create Stack](/images/2.prerequisite/16.png)
+
+![Create Stack](/images/2.prerequisite/17.png)
+
+![Create Stack](/images/2.prerequisite/18.png)
+
+![Create Stack](/images/2.prerequisite/19.png)
+
+![Create Stack](/images/2.prerequisite/20.png)
+
+- **Glue crawler** tên *CustPaymentTxHistory* để lấy dữ liệu từ **Amazon S3** và **Glue database** tên *spectrumdb*
+
+![Create Stack](/images/2.prerequisite/21.png)
+
+![Create Stack](/images/2.prerequisite/22.png)
+
+- **Kinesis Data Stream** tên *cust-payment-txn-stream*.
+
+![Create Stack](/images/2.prerequisite/23.png)
+
+- **Lambda function** tên *GenStreamData-zero-etl-lab* thứ sẽ gửi data đến kinesis datastream
+
+![Create Stack](/images/2.prerequisite/24.png)
+
+- **AWS Eventbridge Rule** tên *zero-etl-lab-EventRule-* * để thực thi lambda function (ở trên) mỗi 1 phút khi được kích hoạt.
+
+![Create Stack](/images/2.prerequisite/25.png)
+
+-**(Nested Stack)** **Amazon Aurora MySQL 3.05.0 (hoặc phiên bản cao hơn) (tương thích với MySQL 8.0.32 hoặc cao hơn)** của **DbInstanceClass: Serverless V2**, kèm theo một **DbClusterParameterGroup** mới, mỗi thành phần đều có tiền tố tên là: *zero-etl-lab-sourceamscluster-* *.
+
+![Create Stack](/images/2.prerequisite/27.png)
+
+![Create Stack](/images/2.prerequisite/26.png)
+
+- **(NESTED Stack) Amazon RDS MySQL 8.0.36 (or higher version)** **DbInstance** tên *prefix zero-etl-lab-sourcerdsmscluster-* *.
+
+![Create Stack](/images/2.prerequisite/28.png)
+
+![Create Stack](/images/2.prerequisite/30.png)
+
+- **(NESTED Stack) Amazon Aurora PostgreSQL 13.9 DbInstanceClass: Serverless V1**, với **cluster/instance** tên *aurorapg*.
+
+![Create Stack](/images/2.prerequisite/34.png)
+
+![Create Stack](/images/2.prerequisite/33.png)
