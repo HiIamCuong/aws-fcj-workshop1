@@ -1,9 +1,9 @@
 ---
 title : "Redshift Streaming Ingestion"
 date :  "`r Sys.Date()`" 
-weight : 2 
+weight : 3 
 chapter : false
-pre : " <b> 2. </b> "
+pre : " <b> 3. </b> "
 ---
 
 **Amazon Redshift Streaming Ingestion** là một công cụ mạnh mẽ giúp bạn tiếp nhận và phân tích dữ liệu phát trực tuyến với khả năng xử lý thông lượng cao và độ trễ thấp, phù hợp cho những yêu cầu về phân tích dữ liệu thời gian thực. Dưới đây là các điểm nổi bật của tính năng này:
