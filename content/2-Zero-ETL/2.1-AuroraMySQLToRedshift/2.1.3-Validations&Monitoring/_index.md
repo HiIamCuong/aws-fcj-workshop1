@@ -89,6 +89,8 @@ select * from auroramysql_zeroetl.filter_missingpk.region;
 select * from auroramysql_zeroetl.filter_missingpk.nation;
 ```
 
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/46.png)
+
 ## Connect, Create and Load more data to experience near real-time CDC
 
 {{% notice info %}}  

@@ -62,7 +62,7 @@ Trước hết bạn cần đăng nhập vào tài khoản **AWS Console Managem
 ![Create Stack](/images/1.prerequisite/13.png)
 
 {{% notice info %}}
-Đến bước này đã xong bước chuẩn bị. Bạn có thể đi đến [phần 3](3-RedshiftStreamingIngestion). Phần dưới đây là để giải thích thêm về các tài nguyên Stack này tạo ra
+Đến bước này đã xong bước chuẩn bị. Bạn có thể đi đến [Part 2](2-Zero-ETL/). Phần dưới đây là để giải thích thêm về các tài nguyên Stack này tạo ra
 {{% /notice %}}
 
 - Một **VPC** với nhiều **subnet**, **routes table** và các tài nguyên mạng khác như **Security Group** để sử dụng **EC2**, **RDS**, **Aurora**

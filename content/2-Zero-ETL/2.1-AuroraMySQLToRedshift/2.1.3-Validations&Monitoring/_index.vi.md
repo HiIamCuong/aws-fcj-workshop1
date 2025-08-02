@@ -88,7 +88,7 @@ select '6. lineitem',count() from seedingdemo.lineitem order by 1;
 select * from auroramysql_zeroetl.filter_missingpk.region;
 select * from auroramysql_zeroetl.filter_missingpk.nation;
 ```
-
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/46.png)
 
 ## Kết nối, tạo và tải dữ liệu để kiểm tra CDC gần thời gian thực
 

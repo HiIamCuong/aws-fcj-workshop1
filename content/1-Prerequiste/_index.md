@@ -55,7 +55,7 @@ Click [here](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?sta
 ![Create Stack](/images/1.prerequisite/13.png)
 
 {{% notice info %}}  
-At this point, the preparation is complete. You can proceed to [Part 3](3-RedshiftStreamingIngestion). The section below provides additional explanations about the resources created by this stack.  
+At this point, the preparation is complete. You can proceed to [Part 2](2-Zero-ETL/). The section below provides additional explanations about the resources created by this stack.  
 {{% /notice %}}
 
 ---

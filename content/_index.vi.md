@@ -17,10 +17,9 @@ Sau đó, chúng ta sẽ sử dụng một số tính năng của [Amazon Redshi
 - [**Amazon Redshift ML**](https://catalog.us-east-1.prod.workshops.aws/workshops/428641a0-1414-4fb7-8de6-a38c053ee19e/en-US/04redshiftml/02rml) – Tích hợp học máy để dự đoán và phân tích nâng cao  
 
 ### Nội dung
-
- 1. [Giới thiệu](1-introduce/)
- 2. [Các bước chuẩn bị](2-Prerequiste/)
- 3. [Tạo kết nối đến máy chủ EC2](3-Accessibilitytoinstance/)
- 4. [Quản lý session logs](4-s3log/)
- 5. [Port Forwarding](5-Portfwd/)
+ 1. [Chuẩn bị](1-Prerequisite/)
+ 2. [Zero-ETL](2-Zero-ETL/)
+ 3. [Redshift Streaming Ingestion](3-RedshiftStreamingIngestion/)
+ 4. [Truy vấn liên kết](4-FederatedQueries)
+ 5. [Phân tích & Học máy](5-Analytics&ML)
  6. [Dọn dẹp tài nguyên](6-cleanup/)
