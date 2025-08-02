@@ -17,7 +17,7 @@ After that we will use some feature of Redshift to help us analyse all our data 
 
 
 ### Content
- 1. [Prerequisite](1-Prerequisite/)
+ 1. [Prerequisite](1-Preparation/)
  2. [Zero-ETL](2-Zero-ETL/)
  3. [Redshift Streaming Ingestion](3-RedshiftStreamingIngestion/)
  4. [Federated Queries](4-FederatedQueries)

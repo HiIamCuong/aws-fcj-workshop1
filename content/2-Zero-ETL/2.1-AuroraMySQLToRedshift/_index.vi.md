@@ -1,44 +1,125 @@
 ---
-title : "Tích hợp Zero-ETL Aurora MySQL với Redshift"
+title : "Chế độ lịch sử"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 4
 chapter : false
-pre : " <b> 2.1 </b> "
+pre : " <b> 2.1.4 </b> "
 ---
 
-Được công bố tại [AWS re:Invent 2023](https://youtu.be/PMfn9_nTDbM?t=7418) và hiện đã có mặt chính thức ([GA](https://aws.amazon.com/about-aws/whats-new/2024/09/amazon-rds-mysql-zero-etl-integration-redshift-generally-available/)) tại nhiều vùng cho **RDS for MySQL phiên bản 8.0**.
+## Tổng quan
 
-## Lợi ích
+Với **Chế độ lịch sử (History Mode)**, bạn có thể cấu hình các tích hợp Zero-ETL để theo dõi mọi phiên bản (bao gồm cập nhật và xóa) của các bản ghi trong bảng nguồn, trực tiếp trên **Amazon Redshift**. Sử dụng chế độ lịch sử, bạn có thể:
 
-Với tính năng **[Zero-ETL Integration](1-Zero-ETL/)** giữa **RDS for MySQL** và **Amazon Redshift**, bạn có thể kết hợp dữ liệu giao dịch từ **RDS for MySQL** với khả năng phân tích mạnh mẽ của **Amazon Redshift**. Tính năng này giúp giảm thiểu công việc xây dựng và quản lý các pipeline ETL tùy chỉnh giữa hai dịch vụ này.
++ Thực hiện phân tích lịch sử,  
++ Xây dựng báo cáo theo thời gian,  
++ Phân tích xu hướng, và  
++ Gửi các bản cập nhật gia tăng đến các ứng dụng phụ trợ sử dụng Amazon Redshift  
 
-Các kỹ sư dữ liệu có thể sao chép dữ liệu từ nhiều cụm cơ sở dữ liệu **RDS for MySQL** vào cùng một cụm **Amazon Redshift** mới hoặc hiện có để có được cái nhìn tổng quan về nhiều ứng dụng hoặc phân vùng. Các cập nhật trong **RDS for MySQL** sẽ được tự động và liên tục đồng bộ đến **Amazon Redshift**, đảm bảo rằng dữ liệu luôn được cập nhật gần thời gian thực.
+## Bật Chế Độ Lịch Sử
 
-Hệ thống có thể hoạt động theo chế độ **serverless** và có khả năng **tự động co giãn** theo khối lượng dữ liệu, giúp bạn không cần phải quản lý hạ tầng phức tạp.
+1. Mở và kết nối Redshift Query Editor  
++ Mở **Amazon Redshift Query editor v2** (nếu chưa mở)  
++ Kết nối với **Redshift Serverless datawarehouse destination** được tạo trong workshop, sử dụng **awsuser/Awsuser123** như hình dưới:
 
-## Quy trình
+![History Mode](/images/2.Zero-ETLIntegration/34.png)  
+![History Mode](/images/2.Zero-ETLIntegration/38.png)
 
-Tích hợp này sao chép dữ liệu từ cơ sở dữ liệu nguồn sang kho dữ liệu đích. Dữ liệu sẽ có sẵn trong **Amazon Redshift** chỉ sau vài giây, cho phép người dùng tận dụng các tính năng phân tích mạnh mẽ như:
+2. Thực thi SQL sau để kiểm tra số bản ghi trong cơ sở dữ liệu đích **auroramysql_zeroetl** được tạo từ tích hợp.  
++ Mở một trình SQL khác trong Query editor v2 để thấy cơ sở dữ liệu mới. Hoặc bạn có thể dùng [three-part notation](https://docs.aws.amazon.com/redshift/latest/dg/cross-database-overview.html):  
+**database_name.schema_name.object_name**, ví dụ: **auroramysql_zeroetl.seedingdemo.region**
 
-- Chia sẻ dữ liệu
-- Tối ưu hóa tải công việc tự động
-- Mở rộng đồng thời (concurrent scaling)
-- Học máy (Machine Learning)
-- Và nhiều tính năng khác
+```
+ALTER DATABASE auroramysql_zeroetl INTEGRATION SET HISTORY_MODE = TRUE FOR TABLE seedingdemo.region;
+```
 
-Bạn có thể xử lý giao dịch thời gian thực trên dữ liệu trong **RDS for MySQL**, đồng thời sử dụng **Amazon Redshift** để phục vụ các nhu cầu phân tích như báo cáo và bảng điều khiển (dashboard).
+![History Mode](/images/2.Zero-ETLIntegration/52.png)
 
-Tích hợp này theo dõi trạng thái của pipeline dữ liệu và sẽ tự động khắc phục sự cố khi có thể. Bạn có thể tạo tích hợp từ nhiều cụm **RDS for MySQL** vào một **namespace Amazon Redshift duy nhất**, từ đó phân tích tổng hợp trên nhiều ứng dụng khác nhau.
++ Điều này sẽ đưa bảng vào trạng thái **Resync initiated**. Có thể theo dõi tại Redshift console dưới tab **Table Statistics**. Quá trình đồng bộ lại có thể mất 15–30 phút.
 
-## Chi phí
+![History Mode](/images/2.Zero-ETLIntegration/53.png)
 
-{{% notice info %}}
-Khi bạn tạo một tích hợp **Zero-ETL** giữa **RDS for MySQL** và **Amazon Redshift**, bạn vẫn sẽ thanh toán theo bảng giá hiện tại của **RDS for MySQL** và **Amazon Redshift** (bao gồm cả chi phí truyền dữ liệu). Tính năng tích hợp này **không tính thêm phí**.
+## Kết nối và chạy cập nhật, xóa trên CSDL nguồn
+
+{{% notice info %}}  
+Trong bước này, bạn sẽ trải nghiệm **Chế độ lịch sử** hoạt động. Mọi cập nhật/xóa thực hiện trên nguồn sẽ được đồng bộ gần như tức thì, đồng thời lưu giữ trạng thái bảng bằng 3 cột chế độ lịch sử được giải thích ở phần sau.
 {{% /notice %}}
 
-Bạn sẽ bị tính phí cho các tài nguyên hiện có của **Amazon RDS for MySQL** và **Amazon Redshift** được sử dụng để tạo và xử lý các thay đổi dữ liệu trong quá trình tích hợp **Zero-ETL**.
+1. Kết nối đến Aurora MySQL instance  
++ Truy cập **EC2 Console**  
++ Chọn **EC2 instance** đã được khởi tạo và click **Connect**
 
-Để biết thêm chi tiết, tham khảo:
+![Create Stack](/images/2.Zero-ETLIntegration/1.png)
 
-- [Giá dịch vụ Amazon RDS for MySQL](https://aws.amazon.com/rds/mysql/pricing/)
-- [Giá dịch vụ Amazon Redshift](https://aws.amazon.com/redshift/pricing/)
+2. Trên trang **Connect**  
++ Chọn **Session manager**  
++ Click **Connect**
+
+![Create Stack](/images/2.Zero-ETLIntegration/2.png)
+
++ Bạn sẽ truy cập CLI của EC2 instance
+
+3. Lấy Endpoint và Port của Aurora MySQL  
++ Vào **Aurora/RDS Console**  
++ Vào tab **Databases**  
++ Chọn database có prefix tên **zero-etl-lab-sourceamscluster-***  
++ Chọn **Role: Writer** trong mặc định  
++ Sao chép **endpoint** của writer
+
+![Create Stack](/images/2.Zero-ETLIntegration/3.png)
+
+4. Trở lại CLI trong EC2 instance  
++ Dùng lệnh sau để kết nối đến Aurora MySQL từ EC2:
+
+`mysql -h <aurora_mysql_writer_endpoint> -P 3306 -u awsuser -p`
+
++ Mật khẩu để đăng nhập:
+
+`Awsuser123`
+
+![Create Stack](/images/2.Zero-ETLIntegration/5.png)
+
+5. Khi đã kết nối tới Aurora MySQL instance  
++ Thực thi các câu lệnh DML sau để cập nhật và xóa:
+
+```
+use seedingdemo;
+
+update region set r_comment='History Mode Update Test' where r_regionkey=1;
+commit;
+update region set r_comment='History Mode Update Test-Second Immediate Update' where r_regionkey=1;
+commit;
+delete from region where r_regionkey=1;
+commit;
+```
+
+![History Mode](/images/2.Zero-ETLIntegration/54.png)
+
++ Kiểm tra rằng trạng thái **Resync initiated** (áp dụng với giao dịch đầu tiên sau khi bật chế độ lịch sử) đã chuyển sang **Synced** trong Redshift console tab **Table Statistics**
+
+![History Mode](/images/2.Zero-ETLIntegration/55.png)
+
+## Xác minh trong Redshift target
+
+1. Quay lại Redshift Query editor v2  
++ Chạy truy vấn sau để xác minh và theo dõi  
++ Chọn cơ sở dữ liệu đích **auroramysql_zeroetl** được tích hợp
+
+```
+select * from seedingdemo.region order by _record_create_time desc, _record_delete_time desc;
+```
+
+![History Mode](/images/2.Zero-ETLIntegration/56.png)
+
+Khi bật chế độ lịch sử, các cột sau sẽ được thêm vào bảng đích để theo dõi thay đổi từ nguồn.  
+Mọi bản ghi bị xóa hoặc thay đổi sẽ tạo một bản ghi mới trên Redshift, do đó số dòng sẽ nhiều hơn so với nguồn.  
+Bản ghi không bị xóa khỏi Redshift khi bị xóa trên nguồn. Bạn có thể tự quản lý bằng cách xóa các bản ghi không còn hiệu lực.
+
+| Column Name           | Data Type | Description                                                                 |
+|-----------------------|-----------|-----------------------------------------------------------------------------|
+| _record_is_active     | Boolean   | Cho biết bản ghi trong đích có đang còn hiệu lực không. `True` nghĩa là còn hiệu lực. |
+| _record_create_time   | Timestamp | Thời điểm (UTC) bản ghi bắt đầu hiệu lực trong nguồn.                      |
+| _record_delete_time   | Timestamp | Thời điểm (UTC) bản ghi bị cập nhật hoặc xóa từ nguồn.                     |
+
+{{% notice info %}}  
+**Chúc mừng!** Bạn đã hoàn tất phần trình diễn **HISTORY MODE** trong **Zero-ETL integrations**
+{{% /notice %}}
