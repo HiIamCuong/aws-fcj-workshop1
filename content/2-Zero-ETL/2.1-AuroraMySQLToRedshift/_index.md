@@ -1,121 +1,44 @@
 ---
-title : "History Mode"
+title : "Zero-ETL Integration Aurora MySQL to Amazon Redshift"
 date :  "`r Sys.Date()`" 
-weight : 4 
+weight : 1 
 chapter : false
-pre : " <b> 2.1.4 </b> "
+pre : " <b> 2.1 </b> "
 ---
 
-## Overview
-With history mode, you can configure your zero-ETL integrations to track every version (including updates and deletes) of your records in source tables, directly in Amazon Redshift. Using history mode, you can
+Announced at [AWS re:Invent 2023](https://youtu.be/PMfn9_nTDbM?t=7418) and now generally available ([GA](https://aws.amazon.com/about-aws/whats-new/2024/09/amazon-rds-mysql-zero-etl-integration-redshift-generally-available/)) in many regions for **RDS for MySQL version 8.0**.
 
-+ Run a historical analysis,
-+ Build look-back reports,
-+ Perform trend analysis, and
-+ Send incremental updates to downstream applications built on top of Amazon Redshift
+## Benefits
 
-## Turn on History Mode
+With the **[Zero-ETL Integration](2-Zero-ETL/)** feature between **RDS for MySQL** and **Amazon Redshift**, you can combine transactional data from **RDS for MySQL** with the powerful analytics capabilities of **Amazon Redshift**. This feature minimizes the work of building and managing custom ETL pipelines between the two systems.
 
-1. Open and Connect Redshift Query Editor
-+ Open **Amazon Redshift Query editor v2** (in case if not already open)
-+ Connect to **Redshift Serverless datawarehouse destination** created as part of this workshop using **awsuser/Awsuser123** credentials as shown.
+Data engineers can replicate data from multiple **RDS for MySQL** database clusters into the same or a new **Amazon Redshift** cluster to gain a consolidated view across multiple applications or partitions. Updates in **RDS for MySQL** are automatically and continuously pushed to **Amazon Redshift**, ensuring near real-time availability of up-to-date information.
 
-![History Mode](/images/2.Zero-ETLIntegration/34.png)
+The entire system can run in **serverless** mode and is capable of **auto-scaling** based on data volume, eliminating infrastructure management overhead.
 
-![History Mode](/images/2.Zero-ETLIntegration/38.png)
+## Progress
 
-2. Execute the SQL below to check the count in target database **auroramysql_zeroetl** created from integration. 
-+ Open another SQL editor in query editor v2 to see the newly created database in drop-down list. Alternatively, you can use [three-part notation](https://docs.aws.amazon.com/redshift/latest/dg/cross-database-overview.html) , i.e. **database_name.schema_name.object_name** to execute the query below using **auroramysql_zeroetl.seedingdemo.<table_name>** instead.
+This integration replicates data from the source database to the destination data warehouse. Data becomes available in **Amazon Redshift** within seconds, allowing users to take advantage of features such as:
 
-```
-ALTER DATABASE auroramysql_zeroetl INTEGRATION SET HISTORY_MODE = TRUE FOR TABLE seedingdemo.region;
-```
+- Data sharing  
+- Automated workload optimization  
+- Concurrency scaling  
+- Machine learning  
+- And more
 
-![History Mode](/images/2.Zero-ETLIntegration/52.png)
+You can perform real-time transactional processing on **RDS for MySQL** data while simultaneously using **Amazon Redshift** for analytics workloads like reporting and dashboards.
 
-+ This will change the table status to **Resync initiated** state. You can monitor this in Redshift console under Zero-ETL integration **Table Statistics** tab. The resync can take as much time as the seeding process (15-30 minutes) for that table.
+The integration monitors the health of the data pipeline and attempts to automatically resolve issues when possible. You can integrate multiple **RDS for MySQL** clusters into a single **Amazon Redshift namespace**, enabling cross-application analytics.
 
-![History Mode](/images/2.Zero-ETLIntegration/53.png)
+## Cost
 
-## Connect and run updates and deletes on source database
-
-{{% notice info %}}  
-In this step, you experience **History mode** in action. All updates/deletes made to source would sync almost immediately maintaining the state of the table using 3 history mode columns explained in next section.
+{{% notice info %}}
+When you create a **Zero-ETL** integration between **RDS for MySQL** and **Amazon Redshift**, you will continue to pay for **RDS for MySQL** and **Amazon Redshift** usage at their current rates (including data transfer costs). This integration feature does **not incur additional charges**.
 {{% /notice %}}
 
-1. To connect to you Aurora Mysql instance 
-+ Navigate to **EC2 console** 
-+ Select your **EC2 instance** provisioned and click on **Connect**.
+You will be billed for the existing **Amazon RDS for MySQL** and **Amazon Redshift** resources used to create and process data changes during the **Zero-ETL** integration.
 
-![Create Stack](/images/2.Zero-ETLIntegration/1.png)
+For more details, refer to:
 
-2. In the **Connect** page
-+ Choose **Session manager**
-+ Choose **Connect**
-
-![Create Stack](/images/2.Zero-ETLIntegration/2.png)
-
-+ You will go to CLI of EC2 instance
-
-3. We need take Endpoint and Port of Aurora MySQL
-
-+ Navigate go **Aurora and RDS Console**
-+ Choose feature **Databases**
-+ Choose database with name prefix **zero-etl-lab-sourceamscluster-***
-+ Choose **Role Writer** below default choose
-+ Copy **endpoint** of writer
-
-![Create Stack](/images/2.Zero-ETLIntegration/3.png)
-
-4. Go back CLI **EC2 instance**
-+ Use this command to connect to your **Aurora MySQL** from **EC2 instance**
-
-`mysql -h <aurora_mysql_writer_endpoint> -P 3306 -u awsuser -p `
-
-+ Password to login
-
-`Awsuser123`
-
-![Create Stack](/images/2.Zero-ETLIntegration/5.png)
-
-5. Once connected to your Aurora Mysql instance
-+ Execute below DMLs to run updates/deletes
-```
-use seedingdemo;
-
-update region set r_comment='History Mode Update Test' where r_regionkey=1;
-commit;
-update region set r_comment='History Mode Update Test-Second Immediate Update' where r_regionkey=1;
-commit;
-delete from region where r_regionkey=1;
-commit;
-```
-
-![History Mode](/images/2.Zero-ETLIntegration/54.png)
-
-+ Verify the **Resync initiated** (applicable for the first transaction after setting history mode) changed to **Synced** in Redshift console under Zero-ETL integration **Table Statistics** tab.
-
-![History Mode](/images/2.Zero-ETLIntegration/55.png)
-
-## Validate in Redshift target
-
-1. Navigate back to Amazon Redshift Query editor v2
-+ Run following validation and monitoring queries
-+ choose target database **auroramysql_zeroetl** created from integration.
-```
-select * from seedingdemo.region order by _record_create_time desc, _record_delete_time desc;
-```
-
-![History Mode](/images/2.Zero-ETLIntegration/56.png)
-
-When history mode is turned on, the following columns are added to your target table to keep track of changes in the source. Any source record that is deleted or changed creates a new record in the target, resulting in more total rows in the target with multiple record versions. Records are not deleted from the target table when deleted or modified in the source. You can manage target tables by deleting inactive records.
-
-| Column Name           | Data Type | Description                                                                 |
-|-----------------------|-----------|-----------------------------------------------------------------------------|
-| _record_is_active     | Boolean   | Indicates if a record in the target is currently active in the source. `True` indicates the record is active. |
-| _record_create_time   | Timestamp | Starting time (UTC) when the source record is active.                      |
-| _record_delete_time   | Timestamp | Ending time (UTC) when the source record is updated or deleted.            |
-
-{{% notice info %}}  
-**Congratulations!** You have successfully completed a demonstration of **HISTORY MODE** in **Zero-ETL integrations**
-{{% /notice %}}
+- [Amazon RDS for MySQL Pricing](https://aws.amazon.com/rds/mysql/pricing/)
+- [Amazon Redshift Pricing](https://aws.amazon.com/redshift/pricing/)
