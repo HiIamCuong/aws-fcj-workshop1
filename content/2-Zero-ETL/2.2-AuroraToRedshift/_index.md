@@ -10,7 +10,7 @@ Announced at [AWS re:Invent 2022](https://youtu.be/Xus8C2s5K9A?t=2212), the feat
 
 ## Benefits
 
-By using [Aurora Zero-ETL Integration with Amazon Redshift](1-Zero-ETL/), you can combine transactional data from Aurora with Amazon Redshift’s analytical capabilities. This reduces the effort of building and managing custom ETL pipelines between Aurora and Redshift.
+By using [Aurora Zero-ETL Integration with Amazon Redshift](2-Zero-ETL/), you can combine transactional data from Aurora with Amazon Redshift’s analytical capabilities. This reduces the effort of building and managing custom ETL pipelines between Aurora and Redshift.
 
 Data engineers can replicate data from multiple Aurora database clusters into the same or a new Amazon Redshift instance to gain a holistic view across multiple applications or partitions. Updates in Aurora are automatically and continuously replicated to Redshift, providing near real-time insights.
 

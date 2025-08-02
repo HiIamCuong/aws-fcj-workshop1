@@ -10,7 +10,7 @@ pre : " <b> 2.2 </b> "
 
 ## Lợi ích
 
-Thông qua [Aurora Zero-ETL Integration với Amazon Redshift](1-Zero-ETL/), bạn có thể kết hợp dữ liệu giao dịch từ Aurora với khả năng phân tích mạnh mẽ của Amazon Redshift. Điều này giúp giảm thiểu công việc xây dựng và quản lý các pipeline ETL tùy chỉnh giữa Aurora và Redshift.
+Thông qua [Aurora Zero-ETL Integration với Amazon Redshift](2-Zero-ETL/), bạn có thể kết hợp dữ liệu giao dịch từ Aurora với khả năng phân tích mạnh mẽ của Amazon Redshift. Điều này giúp giảm thiểu công việc xây dựng và quản lý các pipeline ETL tùy chỉnh giữa Aurora và Redshift.
 
 Các kỹ sư dữ liệu có thể sao chép dữ liệu từ nhiều cụm cơ sở dữ liệu Aurora vào cùng một hoặc một cụm Amazon Redshift mới để có cái nhìn tổng quan trên nhiều ứng dụng hoặc phân vùng. Các cập nhật trong Aurora sẽ được tự động và liên tục đồng bộ sang Redshift, mang lại dữ liệu gần thời gian thực.
 

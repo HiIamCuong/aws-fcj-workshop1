@@ -10,7 +10,7 @@ pre : " <b> 2.1 </b> "
 
 ## Lợi ích
 
-Với tính năng **[Zero-ETL Integration](1-Zero-ETL/)** giữa **RDS for MySQL** và **Amazon Redshift**, bạn có thể kết hợp dữ liệu giao dịch từ **RDS for MySQL** với khả năng phân tích mạnh mẽ của **Amazon Redshift**. Tính năng này giúp giảm thiểu công việc xây dựng và quản lý các pipeline ETL tùy chỉnh giữa hai dịch vụ này.
+Với tính năng **[Zero-ETL Integration](2-Zero-ETL/)** giữa **RDS for MySQL** và **Amazon Redshift**, bạn có thể kết hợp dữ liệu giao dịch từ **RDS for MySQL** với khả năng phân tích mạnh mẽ của **Amazon Redshift**. Tính năng này giúp giảm thiểu công việc xây dựng và quản lý các pipeline ETL tùy chỉnh giữa hai dịch vụ này.
 
 Các kỹ sư dữ liệu có thể sao chép dữ liệu từ nhiều cụm cơ sở dữ liệu **RDS for MySQL** vào cùng một cụm **Amazon Redshift** mới hoặc hiện có để có được cái nhìn tổng quan về nhiều ứng dụng hoặc phân vùng. Các cập nhật trong **RDS for MySQL** sẽ được tự động và liên tục đồng bộ đến **Amazon Redshift**, đảm bảo rằng dữ liệu luôn được cập nhật gần thời gian thực.
 

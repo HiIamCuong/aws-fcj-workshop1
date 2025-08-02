@@ -12,9 +12,9 @@ chapter : false
 
 Sau đó, chúng ta sẽ sử dụng một số tính năng của [Amazon Redshift](https://aws.amazon.com/redshift/) để hỗ trợ phân tích toàn bộ dữ liệu và đưa ra quyết định cho doanh nghiệp của bạn, bao gồm:
 
-- [**Redshift Streaming Ingestion**](https://catalog.us-east-1.prod.workshops.aws/workshops/428641a0-1414-4fb7-8de6-a38c053ee19e/en-US/02streaming) – Nhập dữ liệu luồng vào Redshift  
-- [**Federated Query**](https://catalog.us-east-1.prod.workshops.aws/workshops/428641a0-1414-4fb7-8de6-a38c053ee19e/en-US/03federated) – Truy vấn dữ liệu từ nhiều nguồn khác nhau  
-- [**Amazon Redshift ML**](https://catalog.us-east-1.prod.workshops.aws/workshops/428641a0-1414-4fb7-8de6-a38c053ee19e/en-US/04redshiftml/02rml) – Tích hợp học máy để dự đoán và phân tích nâng cao  
+- [**Redshift Streaming Ingestion**](3-RedshiftStreamingIngestion/) – Nhập dữ liệu luồng vào Redshift  
+- [**Federated Query**](4-FederatedQueries) – Truy vấn dữ liệu từ nhiều nguồn khác nhau  
+- [**Amazon Redshift ML**](5-Analytics&ML) – Tích hợp học máy để dự đoán và phân tích nâng cao  
 
 ### Nội dung
  1. [Chuẩn bị](1-Preparation/)
