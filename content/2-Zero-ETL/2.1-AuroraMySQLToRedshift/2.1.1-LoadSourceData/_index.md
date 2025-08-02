@@ -1,5 +1,5 @@
 ---
-title : "Zero-ETL Integration Aurora MySQL to Amazon Redshift"
+title : "Load Source Data"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false

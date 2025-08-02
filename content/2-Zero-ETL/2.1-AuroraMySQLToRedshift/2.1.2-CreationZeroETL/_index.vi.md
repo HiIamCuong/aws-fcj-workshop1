@@ -1,5 +1,5 @@
 ---
-title : "Tải dữ liệu nguồn"
+title : "Khởi tạo Zero-ETL"
 date :  "`r Sys.Date()`" 
 weight : 2 
 chapter : false
