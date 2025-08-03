@@ -64,7 +64,7 @@ Vì các yêu cầu trước cho đích chưa được thực hiện, chúng ta 
 
 ![Create Zero-ETL Integration](/images/2.Zero-ETLIntegration/21.png)
 
-Bây giờ bạn sẽ thấy màn hình **Review changes**. Màn hình này sẽ hiển thị **Resource policy** và **thay đổi tham số phân biệt chữ hoa chữ thường**. 
+Bây giờ bạn sẽ thấy màn hình **Review changes**. Màn hình này sẽ hiển thị **Resource policy** và **case sensitivity parameter changes**. 
 
 + Bạn nhấn vào Continue và tiếp tục.
 
