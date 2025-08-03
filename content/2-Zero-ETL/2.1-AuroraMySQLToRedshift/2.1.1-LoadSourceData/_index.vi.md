@@ -140,7 +140,7 @@ LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/ord
 
 ## Tạo và tải các table thiếu khóa chính để minh họa DATA FILTERING
 
-1. Tại **Aurora MySQL instance** của bạn. Chạy lệnh SQL dưới đây để tạo các table và schema mà chúng ta sẽ lọc ra trong lần đồng bộ hóa đầu tiên (SEEDING). Chúng ta cố tính xóa khóa chính khỏi SQL để chúng trở thành ứng cử viên cho việc lọc ra
+1. Tại **Aurora MySQL instance** của bạn. Chạy lệnh SQL dưới đây để tạo các table và schema mà chúng ta sẽ **lọc ra** trong lần đồng bộ hóa đầu tiên (SEEDING). Chúng ta cố tính xóa khóa chính khỏi SQL để chúng trở thành ứng cử viên cho việc lọc ra
 ```
 create database filter_missingpk;
 

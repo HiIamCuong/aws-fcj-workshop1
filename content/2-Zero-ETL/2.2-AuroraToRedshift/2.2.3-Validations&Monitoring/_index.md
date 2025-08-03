@@ -3,7 +3,7 @@ title : "Validations & Monitoring"
 date :  "`r Sys.Date()`" 
 weight : 3 
 chapter : false
-pre : " <b> 2.1.3 </b> "
+pre : " <b> 2.2.3 </b> "
 ---
 
 {{% notice info %}}  
@@ -45,12 +45,16 @@ Confirm that your zero-etl integration status has changed from **Creating** to *
 select integration_id from svv_integration; 
 ```
 
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/98.png)
+
 + Use the **integration_id** from the previous step to create a new database from the integration:
 ```
-CREATE DATABASE auroramysql_zeroetl FROM INTEGRATION '<result from above>';
+CREATE DATABASE rdsmysql_zeroetl FROM INTEGRATION '<result from above>';
 ```
 
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/43.png)
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/99.png)
+
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/100.png)
 
 ### Validation of SEEDING and DATA FILTERTING in destination
 
@@ -66,30 +70,23 @@ In this step, you validate that existing data in source is replicated by storage
 
 ![Validations & Monitoring](/images/2.Zero-ETLIntegration/38.png)
 
-2. Execute the SQL below to check the count in target database **auroramysql_zeroetl** created from integration. 
+2. Execute the SQL below to check the count in target database **rdsmysql_zeroetl** created from integration. 
 + Open another SQL editor in query editor v2 to see the newly created database in drop-down list. 
-+ Alternatively, you can use [three-part notation](https://docs.aws.amazon.com/redshift/latest/dg/cross-database-overview.html) , i.e. **database_name.schema_name.object_name** to execute the query below using **auroramysql_zeroetl.seedingdemo.<table_name>** instead.
++ Alternatively, you can use [three-part notation](https://docs.aws.amazon.com/redshift/latest/dg/cross-database-overview.html) , i.e. **database_name.schema_name.object_name** to execute the query below using **rdsmysql_zeroetl.seedingdemo.<table_name>** instead.
 
 ```
-select '1. region' as tablename,count(*) from seedingdemo.region union
-select '2. nation',count(*) from seedingdemo.nation union
-select '3. supplier', count(*) from seedingdemo.supplier union
-select '4. customer', count(*) from seedingdemo.customer union
-select '5. orders',count(*) from seedingdemo.orders union
-select '6. lineitem',count(*) from seedingdemo.lineitem order by 1;
+select count(*) from rdsmysql_zeroetl.seedingdemo.customer_info;
 ```
 
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/45.png)
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/101.png)
 
-3. Validate DATA FILTERING prevented the schema and tables with missing primary keys that you filtered during integration creation.
-+ The SQL statements to select region and nation table records from filter_missingpk schema should fail with Table/Schema does not exist when run.
+3. Validate **DATA FILTERING** prevented the schema and tables with missing primary keys that you filtered during integration creation. The SQL statements to select **customer_info** table records from **filter_missingpk** schema should fail with **ERROR: Could not find parent table for alias "rdsmysql_zeroetl.filter_missingpk.customer_info"**. when run.
 
 ```
-select * from auroramysql_zeroetl.filter_missingpk.region;
-select * from auroramysql_zeroetl.filter_missingpk.nation;
+select count(*) from rdsmysql_zeroetl.filter_missingpk.customer_info;
 ```
 
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/46.png)
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/102.png)
 
 ## Connect, Create and Load more data to experience near real-time CDC
 
@@ -115,16 +112,16 @@ In this step, you experience **CDC (Change Data Capture)** happening in near rea
 
 + Navigate go **Aurora and RDS Console**
 + Choose feature **Databases**
-+ Choose database with name prefix **zero-etl-lab-sourceamscluster-***
++ Choose database with name prefix **zero-etl-lab-sourcerdsmscluster-***
 + Choose **Role Writer** below default choose
 + Copy **endpoint** of writer
 
-![Create Stack](/images/2.Zero-ETLIntegration/3.png)
+![Create Stack](/images/2.Zero-ETLIntegration/57.png)
 
 4. Go back CLI **EC2 instance**
 + Use this command to connect to your **Aurora MySQL** from **EC2 instance**
 
-`mysql -h <aurora_mysql_writer_endpoint> -P 3306 -u awsuser -p `
+`mysql -h rds_mysql_instance_endpoint -P 6612 -u awsuser -p `
 
 + Password to login
 
@@ -132,54 +129,30 @@ In this step, you experience **CDC (Change Data Capture)** happening in near rea
 
 ![Create Stack](/images/2.Zero-ETLIntegration/5.png)
 
-5. Once connected to your Aurora Mysql instance
-+ Execute below DDLs to create tables for order-line dataset.
+5. Once connected to your RDS for Mysql instance
++ Execute below DDLs to create tables and add some CDC records.
 
 ```
 create database cdcdemo;
 
 use cdcdemo;
 
-create table part (
-  p_partkey int8 not null ,
-  p_name varchar(55) not null,
-  p_mfgr char(25) not null,
-  p_brand char(10) not null,
-  p_type varchar(25) not null,
-  p_size int4 not null,
-  PRIMARY KEY (P_PARTKEY)
+create table newtable (
+  new_key int8 not null ,
+  new_name varchar(55) not null,
+  PRIMARY KEY (new_key)
 ) ;
 
-create table partsupp (
-  ps_partkey int8 not null,
-  ps_suppkey int4 not null,
-  ps_availqty int4 not null,
-  ps_supplycost numeric(12,2) not null,
-  Primary Key(PS_PARTKEY, PS_SUPPKEY)
-) ;
+insert into newtable values(1,'dummy_record');
+
+-- Append more rows to the seeding table
+use seedingdemo;
+
+LOAD DATA LOCAL INFILE '/zetldata/customer_info_incr.csv' INTO TABLE customer_info FIELDS TERMINATED BY ',' IGNORE 1 ROWS;
 
 ```
 
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/47.png)
-
-6. Load the data into tables created above from S3. (Just take 1 for your region)
-+ **us-east-1** load commands:
-```
---- For us-east-1 (N Virginia) region, please use below load scripts:
-LOAD DATA FROM S3 PREFIX 's3://redshift-demos/ri2023/ant307/data/order-line/part/' INTO TABLE part FIELDS TERMINATED BY '|';            
-LOAD DATA FROM S3 PREFIX 's3://redshift-demos/ri2023/ant307/data/order-line/partsupp/' INTO TABLE partsupp FIELDS TERMINATED BY '|';            
-
-```
-
-+ **us-west-2** load commands:
-```
---- For us-west-2 (Oregon) region, please use below load scripts:
-LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/order-line/part/' INTO TABLE part FIELDS TERMINATED BY '|';            
-LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/order-line/partsupp/' INTO TABLE partsupp FIELDS TERMINATED BY '|';        
-         
-```
-
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/48.png)
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/103.png)
 
 ### Validation of CDC data sync in destination
 
@@ -191,25 +164,22 @@ LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/ord
 
 ![Validations & Monitoring](/images/2.Zero-ETLIntegration/38.png)
 
-2. Execute the SQL below to check the count in target database **auroramysql_zeroetl** created from integration (**Note** the last 2 tables from **cdcdemo** schema that you just loaded in Aurora MySQL; Will be in Amazon Redshift almost immediately). 
-+ Open another SQL editor in query editor v2 to see the newly created database in drop-down list. Alternatively, you can use [three-part notation](https://docs.aws.amazon.com/redshift/latest/dg/cross-database-overview.html) , i.e. **database_name.schema_name.object_name** to execute the query below using **auroramysql_zeroetl.demodb.<table_name>** instead.
+2. Execute the SQL below to check the count in target database **rdsmysql_zeroetl** created from integration (**Note** There should be 2 new records in **seedingdemo schema** table **customer_info** along with the **newtable** in cdcdemo schema that you just loaded in RDS for MySQL; Will be in Amazon Redshift almost immediately). You may have to open another SQL editor in query editor v2 to see the newly created database in drop-down list. Alternatively, you can use [three-part notation](https://docs.aws.amazon.com/redshift/latest/dg/cross-database-overview.html) , i.e. **database_name.schema_name.object_name** to execute the query below using **rdsmysql_zeroetl.cdcdemo.<table_name>** instead.
+
 ```
-select '1. region' as tablename,count(*) from seedingdemo.region union
-select '2. nation',count(*) from seedingdemo.nation union
-select '3. supplier', count(*) from seedingdemo.supplier union
-select '4. customer', count(*) from seedingdemo.customer union
-select '5. orders',count(*) from seedingdemo.orders union
-select '6. lineitem',count(*) from seedingdemo.lineitem union
-select '7. part',count(*) from cdcdemo.part union
-select '8. partsupp',count(*) from cdcdemo.partsupp order by 1;
+select count(*) from rdsmysql_zeroetl.seedingdemo.customer_info;
+
+select * from rdsmysql_zeroetl.cdcdemo.newtable;
 ```
 
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/49.png)
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/104.png)
+
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/105.png)
 
 ## Monitoring
 
 You can check cloudwatch metrics like statistics of tables replicated, the lag in data freshness from your zero-ETL integration etc from Redshift console.
 
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/50.png)
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/106.png)
 
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/51.png)
+![Validations & Monitoring](/images/2.Zero-ETLIntegration/107.png)

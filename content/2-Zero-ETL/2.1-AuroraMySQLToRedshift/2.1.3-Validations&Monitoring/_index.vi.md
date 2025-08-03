@@ -48,7 +48,7 @@ select integration_id from svv_integration;
 + Dùng kết quả từ bước trên để tạo cơ sở dữ liệu:
 
 ```
-CREATE DATABASE rdsmysql_zeroetl FROM INTEGRATION '<result from above>';
+CREATE DATABASE auroramysql_zeroetl FROM INTEGRATION '<result from above>';
 ```
 
 
@@ -68,7 +68,9 @@ Trong bước này, bạn xác thực rằng dữ liệu hiện tại từ ngu�
 
 ![Validations & Monitoring](/images/2.Zero-ETLIntegration/38.png)
 
-2. Thực hiện truy vấn để kiểm tra số bản ghi trong database **rdsmysql_zeroetl**:
+2. Thực hiện truy vấn để kiểm tra số bản ghi trong database **auroramysql_zeroetl**:
++ Mở một trình soạn thảo SQL khác trong **query editor v2** để xem cơ sở dữ liệu mới tạo trong danh sách thả xuống.
++ Ngoài ra, bạn có thể sử dụng [ký hiệu ba phần](https://docs.aws.amazon.com/redshift/latest/dg/cross-database-overview.html), tức là **database_name.schema_name.object_name** để thực thi truy vấn dưới đây sử dụng **auroramysql_zeroetl.seedingdemo.<table_name>** thay thế.
 
 ```
 select '1. region' as tablename,count() from seedingdemo.region union
@@ -78,7 +80,6 @@ select '4. customer', count() from seedingdemo.customer union
 select '5. orders',count() from seedingdemo.orders union
 select '6. lineitem',count() from seedingdemo.lineitem order by 1;
 ```
-
 
 ![Validations & Monitoring](/images/2.Zero-ETLIntegration/45.png)
 
@@ -185,20 +186,9 @@ LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/ord
 
 ![Validations & Monitoring](/images/2.Zero-ETLIntegration/38.png)
 
-2. Truy vấn kiểm tra lại dữ liệu trong **rdsmysql_zeroetl**:
+2. Thực thi câu lệnh SQL dưới đây để kiểm tra số lượng trong cơ sở dữ liệu đích **auroramysql_zeroetl** được tạo từ integration (**Lưu ý** hai bảng cuối cùng từ lược đồ **cdcdemo** mà bạn vừa tải vào Aurora MySQL; sẽ có mặt trong Amazon Redshift gần như ngay lập tức).
 
-```
-select '1. region' as tablename,count() from seedingdemo.region union
-select '2. nation',count() from seedingdemo.nation union
-select '3. supplier', count() from seedingdemo.supplier union
-select '4. customer', count() from seedingdemo.customer union
-select '5. orders',count() from seedingdemo.orders union
-select '6. lineitem',count() from seedingdemo.lineitem order by 1;
-```
-
-![Validations & Monitoring](/images/2.Zero-ETLIntegration/45.png)
-
-3. Truy vấn dữ liệu đồng bộ từ **cdcdemo**:
++ Mở một trình soạn thảo SQL khác trong **query editor v2** để xem cơ sở dữ liệu mới tạo trong danh sách thả xuống. Ngoài ra, bạn có thể sử dụng [ký hiệu ba phần](https://docs.aws.amazon.com/redshift/latest/dg/cross-database-overview.html), tức là **database_name.schema_name.object_name** để thực thi truy vấn dưới đây sử dụng **auroramysql_zeroetl.demodb.<table_name>** thay thế.
 
 ```
 select '1. region' as tablename,count() from seedingdemo.region union

@@ -15,7 +15,7 @@ pre : " <b> 2.1.1 </b> "
 
 ## Connect to Aurora Mysql, Create and Load tables for SEEDING.
 
-1. To connect to you Aurora Mysql instance 
+1. To connect to your Aurora Mysql instance 
 + Navigate to **EC2 console** 
 + Select your **EC2 instance** provisioned and click on **Connect**.
 
@@ -141,7 +141,7 @@ LOAD DATA FROM S3 PREFIX 's3://redshift-immersionday-labs/ri2023/ant307/data/ord
 
 ## Create and Load tables with missing primary key for demonstrating DATA FILTERING.
 
-1. On your **Aurora Mysql instance**, Run below DDLs to create tables and schema that we would filter out during first time sync (or SEEDING). Note that we have deliberately removed the primary key from the DDL to make them candidates to filter out.
+1. On your **Aurora Mysql instance**, Run below DDLs to create tables and schema that we would **filter out** during first time sync (or SEEDING). Note that we have deliberately removed the primary key from the DDL to make them candidates to filter out.
 ```
 create database filter_missingpk;
 
