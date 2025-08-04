@@ -99,6 +99,8 @@ Select * from cust_payment_tx_stream limit 10;
 Select count(*) as stream_rec_count from cust_payment_tx_stream;
 ```
 
+![ProducingData](/images/3.RedshiftStreamingIngestion/14.png)
+
 {{% notice info %}}
 Congratulations! You have now setup Redshift Streaming Ingestion using a Kinesis Data Stream and Redshift.
 {{% /notice %}}
