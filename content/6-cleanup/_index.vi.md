@@ -6,78 +6,54 @@ chapter = false
 pre = "<b>6. </b>"
 +++
 
-Chúng ta sẽ tiến hành các bước sau để xóa các tài nguyên chúng ta đã tạo trong bài thực hành này.
+{{% notice info %}}   
+Bạn **PHẢI** dọn dẹp trong **tài khoản AWS của chính bạn** để tránh các chi phí phát sinh không kiểm soát.
+{{% /notice %}}
 
-#### Xóa EC2 instance
+Chúng ta sẽ thực hiện các bước sau để xóa tài nguyên đã tạo trong bài thực hành này.
 
-1. Truy cập [giao diện quản trị dịch vụ EC2](https://console.aws.amazon.com/ec2/v2/home)
-  + Click **Instances**.
-  + Click chọn cả 2 instance **Public Linux Instance** và **Private Windows Instance**. 
-  + Click **Instance state**.
-  + Click **Terminate instance**, sau đó click **Terminate** để xác nhận.
+# 1. Xóa tích hợp Zero-ETL
+Xóa các tích hợp zero-etl được tạo như một phần của hội thảo này có tên **zero-etl-***, thực hiện theo các bước dưới đây để xóa:
 
-2. Truy cập [giao diện quản trị dịch vụ IAM](https://console.aws.amazon.com/iamv2/home#/home)
-  + Click **Roles**.
-  + Tại ô tìm kiếm , điền **SSM**.
-  + Click chọn **SSM-Role**.
-  + Click **Delete**, sau đó điền tên role **SSM-Role** và click **Delete** để xóa role.
-  
-![Clean](/images/6.clean/001-clean.png)
++ Trên **bảng điều khiển Amazon RDS**, chọn **Zero-ETL integrations** trong bảng điều hướng.
++ Chọn **zero-ETL integration** bạn muốn xóa và nhấn **Delete**. Thực hiện điều này cho **TẤT CẢ** các tích hợp đã tạo.
++ Để xác nhận việc xóa, nhập vào ô `confirm` sau đó chọn **Delete**.
 
-3. Click **Users**.
-  + Click chọn user **Portfwd**.
-  + Click **Delete**, sau đó điền tên user **Portfwd** và click **Delete** để xóa user.
+![Clean](/images/7.clean/1.png)
 
-#### Xóa S3 bucket
+![Clean](/images/7.clean/2.png)
 
-1. Truy cập [giao diện quản trị dịch vụ System Manager - Session Manager](https://console.aws.amazon.com/systems-manager/session-manager).
-  + Click tab **Preferences**.
-  + Click **Edit**.
-  + Kéo chuột xuống dưới.
-  + Tại mục **S3 logging**.
-  + Bỏ chọn **Enable** để tắt tính năng logging.
-  + Kéo chuột xuống dưới.
-  + Click **Save**.
+![Clean](/images/7.clean/3.png)
 
-2. Truy cập [giao diện quản trị dịch vụ S3](https://s3.console.aws.amazon.com/s3/home)
-  + Click chọn S3 bucket chúng ta đã tạo cho bài thực hành. ( Ví dụ : lab-fcj-bucket-0001 )
-  + Click **Empty**.
-  + Điền **permanently delete**, sau đó click **Empty** để tiến hành xóa object trong bucket.
-  + Click **Exit**.
+# 2. Xóa Stack 
 
-3. Sau khi xóa hết object trong bucket, click **Delete**
+{{% notice info %}}  
+Bạn cần kiểm tra và **làm trống** **S3 bucket** có tên bắt đầu bằng **zero-etl-*** trước vì CloudFormation không thể **làm trống** bucket. Điều này sẽ gây lỗi khi xóa stack.
+{{% /notice %}}
 
-![Clean](/images/6.clean/002-clean.png)
+![Clean](/images/7.clean/8.png)
 
-4. Điền tên S3 bucket, sau đó click **Delete bucket** để tiến hành xóa S3 bucket.
+1. Làm trống S3 bucket
 
-![Clean](/images/6.clean/003-clean.png)
++ Truy cập **bảng điều khiển S3**, chọn **Bucket**
++ Chọn bucket có tên bắt đầu bằng **zero-etl-*** 
++ Chọn **Empty**
 
-#### Xóa các VPC Endpoint
+![Clean](/images/7.clean/6.png)
 
-1. Truy cập vào [giao diện quản trị dịch vụ VPC](https://console.aws.amazon.com/vpc/home)
-  + Click **Endpoints**.
-  + Chọn 4 endpoints chúng ta đã tạo cho bài thực hành bao gồm **SSM**, **SSMMESSAGES**, **EC2MESSAGES**, **S3GW**.
-  + Click **Actions**.
-  + Click **Delete VPC endpoints**.
++ Nhập `permanently delete`
++ Chọn **Empty**
 
-![Clean](/images/6.clean/004-clean.png)
+![Clean](/images/7.clean/5.png)
 
-2. Tại ô confirm , điền **delete**.
-  + Click **Delete** để tiến hành xóa các endpoints.
+![Clean](/images/7.clean/7.png)
 
-3. Click biểu tượng refresh, kiểm tra tất cả các endpoints đã bị xóa trước khi làm bước tiếp theo.
+2. Xóa Stack
 
-![Clean](/images/6.clean/005-clean.png)
++ Truy cập **bảng điều khiển CloudFormation**
++ Chọn **Stacks**
++ Chọn **zero-etl-lab** (không có chữ NESTED trong tên)
 
-#### Xóa VPC
+![Clean](/images/7.clean/4.png)
 
-1. Truy cập vào [giao diện quản trị dịch vụ VPC](https://console.aws.amazon.com/vpc/home)
-  + Click **Your VPCs**.
-  + Click chọn **Lab VPC**.
-  + Click **Actions**.
-  + Click **Delete VPC**.
-
-2. Tại ô confirm, điền **delete** để xác nhận, click **Delete** để thực hiện xóa **Lab VPC** và các tài nguyên liên quan.
-
-![Clean](/images/6.clean/006-clean.png)
+![Clean](/images/7.clean/11.png)

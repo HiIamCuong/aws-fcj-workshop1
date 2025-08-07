@@ -1,9 +1,9 @@
 ---
 title : "Phân tích tất cả dữ liệu của bạn"
 date :  "`r Sys.Date()`" 
-weight : 5
+weight : 1
 chapter : false
-pre : " <b> 5. </b> "
+pre : " <b> 5.1 </b> "
 ---
 
 {{% notice info %}}  

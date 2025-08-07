@@ -1,9 +1,9 @@
 ---
 title : "Redshift Machine Learning"
 date :  "`r Sys.Date()`" 
-weight : 2 
+weight : 1 
 chapter : false
-pre : " <b> 5.2 </b> "
+pre : " <b> 5.2.1 </b> "
 ---
 
 Thông thường, khi chạy các mô hình Machine Learning, chúng ta cần kết hợp cả dữ liệu thời gian thực và dữ liệu lịch sử để nhận diện các xu hướng và phát hiện các giao dịch gian lận.

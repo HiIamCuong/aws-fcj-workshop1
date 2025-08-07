@@ -6,78 +6,54 @@ chapter = false
 pre = "<b>6. </b>"
 +++
 
+{{% notice info %}}  
+You **MUST** clean up in your **own AWS account** to avoid any runaway costs.
+{{% /notice %}}
+
 We will take the following steps to delete the resources we created in this exercise.
 
-#### Delete EC2 instance
+# 1. Delete Zero-ETL integration
+Delete the zero-etl integrations created as part of this workshop named **zero-etl-***, follow the steps below for deletion:
 
-1. Go to [EC2 service management console](https://console.aws.amazon.com/ec2/v2/home)
-   + Click **Instances**.
-   + Select both **Public Linux Instance** and **Private Windows Instance** instances.
-   + Click **Instance state**.
-   + Click **Terminate instance**, then click **Terminate** to confirm.
++ On the **Amazon RDS console**, choose **Zero-ETL integrations** in the navigation pane.
++ Select the **zero-ETL integration** that you want to delete and choose **Delete**. Do this for **ALL** integrations created.
++ To confirm the deletion, type in box `confirm` then choose **Delete**.
 
-2. Go to [IAM service management console](https://console.aws.amazon.com/iamv2/home#/home)
-   + Click **Roles**.
-   + In the search box, enter **SSM**.
-   + Click to select **SSM-Role**.
-   + Click **Delete**, then enter the role name **SSM-Role** and click **Delete** to delete the role.
+![Clean](/images/7.clean/1.png)
 
-![Clean](/images/6.clean/001-clean.png)
+![Clean](/images/7.clean/2.png)
 
-3. Click **Users**.
-   + Click on user **Portfwd**.
-   + Click **Delete**, then enter the user name **Portfwd** and click **Delete** to delete the user.
+![Clean](/images/7.clean/3.png)
 
-#### Delete S3 bucket
+# 2. Delete Stack 
 
-1. Access [System Manager - Session Manager service management console](https://console.aws.amazon.com/systems-manager/session-manager).
-   + Click the **Preferences** tab.
-   + Click **Edit**.
-   + Scroll down.
-   + In the section **S3 logging**.
-   + Uncheck **Enable** to disable logging.
-   + Scroll down.
-   + Click **Save**.
+{{% notice info %}}  
+You need check and **empty** **S3 bucket** have name **zero-etl-*** first because CloudFormation cannot **empty** bucket. That will make error when delete stack. If you 
+{{% /notice %}}
 
-2. Go to [S3 service management console](https://s3.console.aws.amazon.com/s3/home)
-   + Click on the S3 bucket we created for this lab. (Example: lab-fcj-bucket-0001 )
-   + Click **Empty**.
-   + Enter **permanently delete**, then click **Empty** to proceed to delete the object in the bucket.
-   + Click **Exit**.
+![Clean](/images/7.clean/8.png)
 
-3. After deleting all objects in the bucket, click **Delete**
+1. Empty S3 bucket
 
-![Clean](/images/6.clean/002-clean.png)
++ Go to the **S3 console** choose **Bucket**
++ Choose bucket with prefix name **zero-etl-*** 
++ Choose **Empty**
 
-4. Enter the name of the S3 bucket, then click **Delete bucket** to proceed with deleting the S3 bucket.
+![Clean](/images/7.clean/6.png)
 
-![Clean](/images/6.clean/003-clean.png)
++ type `permanently delete`
++ Choose **Empty**
 
-#### Delete VPC Endpoints
+![Clean](/images/7.clean/5.png)
 
-1. Go to [VPC service management console](https://console.aws.amazon.com/vpc/home)
-   + Click **Endpoints**.
-   + Select the 4 endpoints we created for the lab including **SSM**, **SSMMESSAGES**, **EC2MESSAGES**, **S3GW**.
-   + Click **Actions**.
-   + Click **Delete VPC endpoints**.
+![Clean](/images/7.clean/7.png)
 
-![Clean](/images/6.clean/004-clean.png)
+2. Delete Stack
 
-2. In the confirm box, enter **delete**.
-   + Click **Delete** to proceed with deleting endpoints.
++ Go to **CloudFormation Console**
++ Choose **Stacks**
++ Choose **zero-etl-lab** (dont have NESTED text on name)
 
-3. Click the refresh icon, check that all endpoints have been deleted before proceeding to the next step.
+![Clean](/images/7.clean/4.png)
 
-![Clean](/images/6.clean/005-clean.png)
-
-#### Delete VPC
-
-1. Go to [VPC service management console](https://console.aws.amazon.com/vpc/home)
-   + Click **Your VPCs**.
-   + Click on **Lab VPC**.
-   + Click **Actions**.
-   + Click **Delete VPC**.
-
-2. In the confirm box, enter **delete** to confirm, click **Delete** to delete **Lab VPC** and related resources.
-
-![Clean](/images/6.clean/006-clean.png)
+![Clean](/images/7.clean/11.png)
