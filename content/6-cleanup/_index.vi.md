@@ -6,18 +6,18 @@ chapter = false
 pre = "<b>6. </b>"
 +++
 
-{{% notice info %}}   
-Bạn **PHẢI** dọn dẹp trong **tài khoản AWS của chính bạn** để tránh các chi phí phát sinh không kiểm soát.
+{{% notice info %}}  
+Bạn **PHẢI** dọn dẹp trong **tài khoản AWS của bạn** để tránh các chi phí không mong muốn.  
 {{% /notice %}}
 
-Chúng ta sẽ thực hiện các bước sau để xóa tài nguyên đã tạo trong bài thực hành này.
+Chúng tôi sẽ thực hiện các bước sau để xóa các tài nguyên chúng tôi đã tạo trong bài tập này.
 
-# 1. Xóa tích hợp Zero-ETL
-Xóa các tích hợp zero-etl được tạo như một phần của hội thảo này có tên **zero-etl-***, thực hiện theo các bước dưới đây để xóa:
+## 1. Xóa tích hợp Zero-ETL
+Xóa các tích hợp zero-etl được tạo ra trong khuôn khổ của workshop này có tên **zero-etl-***, làm theo các bước dưới đây để xóa:
 
-+ Trên **bảng điều khiển Amazon RDS**, chọn **Zero-ETL integrations** trong bảng điều hướng.
-+ Chọn **zero-ETL integration** bạn muốn xóa và nhấn **Delete**. Thực hiện điều này cho **TẤT CẢ** các tích hợp đã tạo.
-+ Để xác nhận việc xóa, nhập vào ô `confirm` sau đó chọn **Delete**.
++ Trong **Amazon RDS console**, chọn **Zero-ETL integrations** trong bảng điều hướng.
++ Chọn **Zero-ETL integration** mà bạn muốn xóa và chọn **Delete**. Làm điều này cho **TẤT CẢ** các tích hợp đã tạo.
++ Để xác nhận xóa, gõ vào ô `confirm` rồi chọn **Delete**.
 
 ![Clean](/images/7.clean/1.png)
 
@@ -25,23 +25,23 @@ Xóa các tích hợp zero-etl được tạo như một phần của hội th�
 
 ![Clean](/images/7.clean/3.png)
 
-# 2. Xóa Stack 
+## 2. Xóa Stack
 
 {{% notice info %}}  
-Bạn cần kiểm tra và **làm trống** **S3 bucket** có tên bắt đầu bằng **zero-etl-*** trước vì CloudFormation không thể **làm trống** bucket. Điều này sẽ gây lỗi khi xóa stack.
+Bạn cần kiểm tra và **dọn sạch** **S3 bucket** có tên **zero-etl-*** trước, vì CloudFormation không thể **dọn sạch** bucket. Điều này sẽ gây lỗi khi xóa stack. Nếu bạn  
 {{% /notice %}}
 
 ![Clean](/images/7.clean/8.png)
 
-1. Làm trống S3 bucket
+1. Dọn sạch S3 bucket
 
-+ Truy cập **bảng điều khiển S3**, chọn **Bucket**
-+ Chọn bucket có tên bắt đầu bằng **zero-etl-*** 
++ Đi đến **S3 console** và chọn **Bucket**
++ Chọn bucket có tiền tố tên **zero-etl-*** 
 + Chọn **Empty**
 
 ![Clean](/images/7.clean/6.png)
 
-+ Nhập `permanently delete`
++ Gõ `permanently delete`
 + Chọn **Empty**
 
 ![Clean](/images/7.clean/5.png)
@@ -50,10 +50,18 @@ Bạn cần kiểm tra và **làm trống** **S3 bucket** có tên bắt đầu 
 
 2. Xóa Stack
 
-+ Truy cập **bảng điều khiển CloudFormation**
++ Đi đến **CloudFormation Console**
 + Chọn **Stacks**
 + Chọn **zero-etl-lab** (không có chữ NESTED trong tên)
 
 ![Clean](/images/7.clean/4.png)
 
 ![Clean](/images/7.clean/11.png)
+
+## 3. Xóa DB snapshots
+
++ Đi đến **Aurora và RDS console**
++ Chọn snapshots trong bảng điều hướng bên trái
++ Kiểm tra và **xóa** tất cả các snapshots **manual snapshots** và **system snapshots**
+
+![Clean](/images/7.clean/12.png)

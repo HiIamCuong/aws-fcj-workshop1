@@ -12,7 +12,7 @@ You **MUST** clean up in your **own AWS account** to avoid any runaway costs.
 
 We will take the following steps to delete the resources we created in this exercise.
 
-# 1. Delete Zero-ETL integration
+## 1. Delete Zero-ETL integration
 Delete the zero-etl integrations created as part of this workshop named **zero-etl-***, follow the steps below for deletion:
 
 + On the **Amazon RDS console**, choose **Zero-ETL integrations** in the navigation pane.
@@ -25,7 +25,7 @@ Delete the zero-etl integrations created as part of this workshop named **zero-e
 
 ![Clean](/images/7.clean/3.png)
 
-# 2. Delete Stack 
+## 2. Delete Stack 
 
 {{% notice info %}}  
 You need check and **empty** **S3 bucket** have name **zero-etl-*** first because CloudFormation cannot **empty** bucket. That will make error when delete stack. If you 
@@ -57,3 +57,11 @@ You need check and **empty** **S3 bucket** have name **zero-etl-*** first becaus
 ![Clean](/images/7.clean/4.png)
 
 ![Clean](/images/7.clean/11.png)
+
+## 3. Delete DB snapshots
+
++ Go in **Aurora and RDS console**
++ Choose snapshots in left pane
++ Check and **delete** all snapshots **manual snapshots** and **system snapshots** 
+
+![Clean](/images/7.clean/12.png)
