@@ -28,7 +28,7 @@ Delete the zero-etl integrations created as part of this workshop named **zero-e
 ## 2. Delete Stack 
 
 {{% notice info %}}  
-You need check and **empty** **S3 bucket** have name **zero-etl-*** first because CloudFormation cannot **empty** bucket. That will make error when delete stack. If you 
+You need check and **empty** **S3 bucket** have name **zero-etl-*** first because CloudFormation cannot **empty** bucket. That will make error when delete **stack**. If you don't empty **S3 bucket** first and delete **stack** this will happend
 {{% /notice %}}
 
 ![Clean](/images/7.clean/8.png)

@@ -28,7 +28,7 @@ Xóa các tích hợp zero-etl được tạo ra trong khuôn khổ của worksh
 ## 2. Xóa Stack
 
 {{% notice info %}}  
-Bạn cần kiểm tra và **dọn sạch** **S3 bucket** có tên **zero-etl-*** trước, vì CloudFormation không thể **dọn sạch** bucket. Điều này sẽ gây lỗi khi xóa stack. Nếu bạn  
+Bạn cần kiểm tra và **dọn sạch** **S3 bucket** có tên **zero-etl-*** trước, vì CloudFormation không thể **dọn sạch** bucket. Điều này sẽ gây lỗi khi xóa **stack**. Nếu bạn không **empty** **S3 bucket** trước mà vẫn xóa **stack** điều này sẽ xảy ra
 {{% /notice %}}
 
 ![Clean](/images/7.clean/8.png)
