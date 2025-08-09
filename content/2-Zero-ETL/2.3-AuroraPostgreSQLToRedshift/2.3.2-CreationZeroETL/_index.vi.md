@@ -38,7 +38,7 @@ Vì các yêu cầu trước khi kết nối chưa được đáp ứng, bạn s
 + Khi hoàn tất, nhấp vào **Next**.
 
 {{% notice info %}}
-**Data Filtering** sử dụng ký tự đại diện *** wildcard** có thể áp dụng cho các trường hợp **ALL or NOTHING** đối với **schemas** hoặc **tables**. Nếu bạn muốn so khớp chuỗi theo kiểu **starts with** hoặc **contains**, hãy sử dụng biểu thức chính quy trong các điều kiện **include** và **exclude** với cú pháp lọc [maxwell filter syntax](https://maxwells-daemon.io/filtering/). Đọc thêm trong tài liệu [data filtering for zero etl](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html#zero-etl.filtering-format).
+**Data Filtering** sử dụng ký tự đại diện **wildcard** có thể áp dụng cho các trường hợp **ALL or NOTHING** đối với **schemas** hoặc **tables**. Nếu bạn muốn so khớp chuỗi theo kiểu **starts with** hoặc **contains**, hãy sử dụng biểu thức chính quy trong các điều kiện **include** và **exclude** với cú pháp lọc [maxwell filter syntax](https://maxwells-daemon.io/filtering/). Đọc thêm trong tài liệu [data filtering for zero etl](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html#zero-etl.filtering-format).
 {{% /notice %}}
 
 ![Create Zero-ETL Integration](/images/2.Zero-ETLIntegration/119.png)

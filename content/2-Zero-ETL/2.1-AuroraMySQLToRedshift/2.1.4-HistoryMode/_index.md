@@ -7,7 +7,7 @@ pre : " <b> 2.1.4 </b> "
 ---
 
 ## Overview
-With history mode, you can configure your zero-ETL integrations to track every version (including updates and deletes) of your records in source tables, directly in Amazon Redshift. Using history mode, you can
+With **history mode**, you can configure your zero-ETL integrations to track every version (including updates and deletes) of your records in source tables, directly in **Amazon Redshift**. Using history mode, you can
 
 + Run a historical analysis,
 + Build look-back reports,

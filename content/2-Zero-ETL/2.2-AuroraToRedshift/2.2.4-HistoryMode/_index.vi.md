@@ -7,7 +7,7 @@ pre : " <b> 2.2.4 </b> "
 ---
 
 ## Tổng quan
-Với chế độ lịch sử (History Mode), bạn có thể cấu hình các Zero-ETL integrations để theo dõi mọi phiên bản (bao gồm cập nhật và xóa) của các bản ghi trong các bảng nguồn, trực tiếp trong Amazon Redshift. Sử dụng chế độ lịch sử, bạn có thể:
+Với **chế độ lịch sử (History Mode)**, bạn có thể cấu hình các Zero-ETL integrations để theo dõi mọi phiên bản (bao gồm cập nhật và xóa) của các bản ghi trong các bảng nguồn, trực tiếp trong **Amazon Redshift**. Sử dụng chế độ lịch sử, bạn có thể:
 
 + Thực hiện phân tích lịch sử,
 + Xây dựng các báo cáo xem lại,

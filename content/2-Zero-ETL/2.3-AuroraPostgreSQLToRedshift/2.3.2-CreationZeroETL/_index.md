@@ -37,7 +37,7 @@ Since source pre-requisites were not already met, we will get an error message a
 + When complete, click **Next**.
 
 {{% notice info %}}
-**Data Filtering** using *** wildcard** is applicable for ALL or NOTHING scenarios for **schemas** or **tables**. If you want to string match **starts with** or **contains** kind of values, use regular expressions in the **include** and **exclude** clauses using [maxwell filter syntax](https://maxwells-daemon.io/filtering/) instead. Read more in [data filtering for zero etl](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html#zero-etl.filtering-format) documentation.
+**Data Filtering** using **wildcard** is applicable for ALL or NOTHING scenarios for **schemas** or **tables**. If you want to string match **starts with** or **contains** kind of values, use regular expressions in the **include** and **exclude** clauses using [maxwell filter syntax](https://maxwells-daemon.io/filtering/) instead. Read more in [data filtering for zero etl](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html#zero-etl.filtering-format) documentation.
 {{% /notice %}}
 
 ![Create Zero-ETL Integration](/images/2.Zero-ETLIntegration/119.png)
