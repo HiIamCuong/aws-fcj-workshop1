@@ -62,7 +62,7 @@ You need check and **empty** **S3 bucket** have name **zero-etl-*** first becaus
 
 + Go in **Aurora and RDS console**
 + Choose snapshots in left pane
-+ Check and **delete** all snapshots **manual snapshots** and **system snapshots** 
++ Check and **delete** all snapshots **manual snapshots** and **system snapshots** related to the lab (have prefix name **zero-etl**)
 
 ![Clean](/images/7.clean/12.png)
 

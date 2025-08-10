@@ -62,7 +62,7 @@ Bạn cần kiểm tra và **dọn sạch** **S3 bucket** có tên **zero-etl-**
 
 + Đi đến **Aurora và RDS console**
 + Chọn snapshots trong bảng điều hướng bên trái
-+ Kiểm tra và **xóa** tất cả các snapshots **manual snapshots** và **system snapshots**
++ Kiểm tra và **xóa** tất cả các snapshots **manual snapshots** và **system snapshots** có liên quan đến bài lab (có tiền tố trong tên **zero-etl**)
 
 ![Clean](/images/7.clean/12.png)
 
