@@ -65,3 +65,7 @@ You need check and **empty** **S3 bucket** have name **zero-etl-*** first becaus
 + Check and **delete** all snapshots **manual snapshots** and **system snapshots** 
 
 ![Clean](/images/7.clean/12.png)
+
+{{% notice info %}}  
+**Congratulations** you have completed the **clean up** and completed the workshop. Thank you for taking the time to do this.
+{{% /notice %}}

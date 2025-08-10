@@ -65,3 +65,7 @@ Bạn cần kiểm tra và **dọn sạch** **S3 bucket** có tên **zero-etl-**
 + Kiểm tra và **xóa** tất cả các snapshots **manual snapshots** và **system snapshots**
 
 ![Clean](/images/7.clean/12.png)
+
+{{% notice info %}}  
+**Chúc mừng** bạn đã hoàn thành việc **dọn dẹp** và hoàn thành buổi hội thảo. Cảm ơn bạn đã dành thời gian cho phần này.
+{{% /notice %}}
