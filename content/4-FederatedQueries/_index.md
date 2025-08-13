@@ -33,3 +33,4 @@ When running a federated query, Amazon Redshift performs the following steps:
 
 This process allows for efficient and scalable querying across multiple data sources.
 
+![Architecture](/images/4.FederatedQuery/14.png)

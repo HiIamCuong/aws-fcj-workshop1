@@ -21,3 +21,5 @@ pre : " <b> 2. </b> "
 - Data streaming platforms and message queues transmitting real-time data from multiple sources.
 
 Traditionally, moving data from operational and transactional databases into data warehouses and data lakes has required a complex ETL solution. Today, zero-ETL capabilities can act as a data replication tool, instantly copying data from operational databases, transactional systems, and applications into data warehouses and data lakes.
+
+![Architecture](/images/2.Zero-ETLIntegration/147.png)

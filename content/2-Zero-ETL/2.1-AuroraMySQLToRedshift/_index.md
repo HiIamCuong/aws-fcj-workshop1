@@ -30,6 +30,8 @@ You can perform real-time transactional processing on **RDS for MySQL** data whi
 
 The integration monitors the health of the data pipeline and attempts to automatically resolve issues when possible. You can integrate multiple **RDS for MySQL** clusters into a single **Amazon Redshift namespace**, enabling cross-application analytics.
 
+![Architecture](/images/2.Zero-ETLIntegration/149.png)
+
 ## Cost
 
 {{% notice info %}}

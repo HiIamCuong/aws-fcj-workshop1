@@ -30,6 +30,8 @@ Bạn có thể xử lý giao dịch thời gian thực trên dữ liệu trong 
 
 Tích hợp này theo dõi trạng thái của pipeline dữ liệu và sẽ tự động khắc phục sự cố khi có thể. Bạn có thể tạo tích hợp từ nhiều cụm **RDS for MySQL** vào một **namespace Amazon Redshift duy nhất**, từ đó phân tích tổng hợp trên nhiều ứng dụng khác nhau.
 
+![Architecture](/images/2.Zero-ETLIntegration/149.png)
+
 ## Chi phí
 
 {{% notice info %}}

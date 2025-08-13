@@ -32,3 +32,5 @@ Khi thực thi một truy vấn liên kết, Amazon Redshift thực hiện các 
 3. Amazon Redshift sau đó **phân phối các dòng kết quả** đến các nút tính toán để xử lý thêm.
 
 Quy trình này cho phép truy vấn dữ liệu hiệu quả và có khả năng mở rộng từ nhiều nguồn dữ liệu khác nhau.
+
+![Architecture](/images/4.FederatedQuery/14.png)

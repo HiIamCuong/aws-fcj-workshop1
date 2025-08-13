@@ -31,6 +31,8 @@ With [Zero-ETL integration between Aurora PostgreSQL and Amazon Redshift](https:
 - Integration pipelines are monitored and automatically recover from failures.
 - You can integrate data from multiple Aurora PostgreSQL clusters into a single Amazon Redshift namespace for centralized insights.
 
+![Architecture](/images/2.Zero-ETLIntegration/150.png)
+
 ## Pricing
 
 {{% notice info %}}

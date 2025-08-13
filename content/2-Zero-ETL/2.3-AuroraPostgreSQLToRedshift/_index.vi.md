@@ -30,6 +30,8 @@ Với [tích hợp Zero-ETL giữa Aurora PostgreSQL và Amazon Redshift](https:
 - Hệ thống tự động theo dõi pipeline và phục hồi khi có lỗi.
 - Hỗ trợ tích hợp từ nhiều cụm Aurora PostgreSQL vào một namespace Amazon Redshift duy nhất.
 
+![Architecture](/images/2.Zero-ETLIntegration/150.png)
+
 ## Giá thành
 
 {{% notice info %}}

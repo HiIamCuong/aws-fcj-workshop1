@@ -29,6 +29,8 @@ Bạn vẫn có thể thực hiện các giao dịch thời gian thực trên Au
 
 Tích hợp này theo dõi tình trạng pipeline dữ liệu và cố gắng phục hồi khi có lỗi. Bạn có thể tích hợp từ nhiều cụm Aurora DB vào một không gian tên Redshift duy nhất để truy xuất thông tin từ nhiều ứng dụng.
 
+![Architecture](/images/2.Zero-ETLIntegration/148.png)
+
 ## Chi phí
 
 {{% notice info %}}

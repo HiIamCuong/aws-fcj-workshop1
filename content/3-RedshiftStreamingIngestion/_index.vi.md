@@ -36,3 +36,5 @@ pre : " <b> 3. </b> "
 ---
 
 **Tóm lại**, Amazon Redshift Streaming Ingestion mang lại một giải pháp mạnh mẽ, nhanh chóng và dễ dàng cho việc xử lý và phân tích dữ liệu phát trực tuyến, giúp bạn tạo ra các quyết định dữ liệu thông minh trong thời gian thực mà không cần phải lo lắng về các công đoạn xử lý phức tạp.
+
+![architecture](/images/3.RedshiftStreamingIngestion/15.png)

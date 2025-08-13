@@ -22,3 +22,5 @@ pre : " <b> 2. </b> "
 - Nền tảng truyền dữ liệu và hàng đợi tin nhắn truyền dữ liệu thời gian thực từ một số nguồn.
 
 Theo truyền thống, quá trình di chuyển dữ liệu từ cơ sở dữ liệu hoạt động và giao dịch vào data warehouse và data lake luôn đòi hỏi một giải pháp ETL phức tạp. Ngày nay, khả năng tích hợp không ETL có thể hoạt động như một công cụ sao chép dữ liệu, ngay lập tức sao chép dữ liệu từ cơ sở dữ liệu hoạt động, cơ sở dữ liệu giao dịch và các ứng dụng vào data warehouse và data lake.
+
+![Architecture](/images/2.Zero-ETLIntegration/147.png)

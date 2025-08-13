@@ -16,6 +16,8 @@ Sau đó, chúng ta sẽ sử dụng một số tính năng của [Amazon Redshi
 - [**Federated Query**](4-FederatedQueries) – Truy vấn dữ liệu từ nhiều nguồn khác nhau  
 - [**Amazon Redshift ML**](5-Analytics&ML) – Tích hợp học máy để dự đoán và phân tích nâng cao  
 
+![Architecture](architecture.png)
+
 ### Nội dung
  1. [Chuẩn bị](1-Preparation/)
  2. [Zero-ETL](2-Zero-ETL/)
