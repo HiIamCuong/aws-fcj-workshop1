@@ -15,7 +15,7 @@ After that we will use some feature of Redshift to help us analyse all our data 
 - [**Federated Query**](4-FederatedQueries) – Query data from multiple sources  
 - [**Amazon Redshift ML**](5-Analytics&ML) – Integrate machine learning for predictions and advanced analytics  
 
-![Architecture](architecture.png)
+![Architecture](/images/architecture.png)
 
 ### Content
  1. [Prerequisite](1-Prerequisite/)
